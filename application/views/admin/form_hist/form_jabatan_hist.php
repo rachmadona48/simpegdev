@@ -284,16 +284,6 @@
                         </div>
                     </div>
 
-                    <!-- <div class="form-group pickerpicker">
-                        <label class="col-sm-4 control-label">Eselon</label>
-                        <div class="col-sm-8">                      
-                            <select class="form-control chosen-eselon" name="eselon" id="eselon" tabindex="2" data-placeholder="Pilih Eselon...">
-                                <option></option>
-                                <?php echo $listEselon; ?> 
-                            </select>
-                        </div>
-                    </div> -->
-
                    	<div class="form-group pickerpicker">
                         <label class="col-sm-4 control-label">Jenis SK</label>
                         <div class="col-sm-8">                      
@@ -327,28 +317,6 @@
                             </select>
                         </div>
                     </div>
-        			 
-                    <!-- <div class="form-group pickerpicker">
-                        <label class="col-sm-4 control-label">Kode Sort</label>
-                        <div class="col-sm-8">
-                            <input type="text" id="kdsort" name="kdsort" minlength="1" maxlength="1" onkeypress="return numbersonly1(this, event)" placeholder="Kode sort (0-9)" value="<?php echo isset($infoJabatan->KDSORT) ? $infoJabatan->KDSORT: ""; ?>" class="form-control">
-                        </div>
-                    </div> -->
-        		
-        			 <!--<div class="form-group pickerpicker">
-        				<label class="col-sm-4 control-label">Kredit</label>
-                    	<div class="col-sm-8">
-                    		<input type="text" id="kredit" name="kredit" maxlength="4" onkeypress="return numbersonly1(this, event)" placeholder="Kredit" value="<?php echo isset($infoJabatan->KREDIT) ? $infoJabatan->KREDIT: ""; ?>" class="form-control">
-                    	</div>
-                    </div>
-
-        			<div class="form-group pickerpicker">
-        				<label class="col-sm-4 control-label">STATUS</label>                	
-                        <div class="col-sm-8">                          
-                              <div class="i-checks inline"><label> <input type="radio" name="status" <?php echo isset($infoJabatan->STATUS) ? ($infoJabatan->STATUS == 0 ? "checked" : "") : ""; ?> value="0"> <i></i> Aktif </label></div>&nbsp;&nbsp;&nbsp;
-                          <div class="i-checks inline"><label> <input type="radio" name="status" <?php echo isset($infoJabatan->STATUS) ? ($infoJabatan->STATUS == 1 ? "checked" : "") : ""; ?> value="1"> <i></i> Non-Aktif </label></div>
-                        </div>
-                    </div>    	-->
 
                     <div class="form-group pickerpicker" id="data_15" style="display:none">
                         <label class="col-sm-4 control-label">TMT Pensiun</label>
@@ -374,9 +342,16 @@
                     	</div>
                     </div>-->
                                     
-                </div>
-                <!-- END SIDE 2 -->
-            </div>	            			            			        	
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">KETERANGAN</label>
+                        <div class="col-sm-8">
+                            <textarea class="form-control" name="keterangan" id="keterangan" maxlength="100" placeholder="Keterangan"><?php echo isset($infoJabatan->KETERANGAN) ? $infoJabatan->KETERANGAN:""; ?></textarea>
+                        </div>         
+                    </div>
+                    <!-- END SIDE 2 -->
+                </div>	            			            			        	
            
     	
     </div>

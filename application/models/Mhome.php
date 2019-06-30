@@ -635,6 +635,7 @@
         $NOSK = $this->input->post('nosk');
         $TGSK = $this->input->post('tgsk');
         $KREDIT = $this->input->post('kredit');
+        $KET = $this->input->post('keterangan');
         if($KREDIT=='')
         {
             $KREDIT = 0;
@@ -678,9 +679,9 @@
         
         if($count == 0)
         {
-            $sql = "INSERT INTO PERS_JABATAN_HIST(NRK,TMT,KOLOK,KOJAB,KDSORT,TGAKHIR,KOPANG,ESELON,PEJTT,NOSK,TGSK,KREDIT,STATUS,USER_ID,TERM,TG_UPD,CKOJABF,KLOGAD,SPMU,TMTPENSIUN,JENIS_SK) 
+            $sql = "INSERT INTO PERS_JABATAN_HIST(NRK,TMT,KOLOK,KOJAB,KDSORT,TGAKHIR,KOPANG,ESELON,PEJTT,NOSK,TGSK,KREDIT,STATUS,USER_ID,TERM,TG_UPD,CKOJABF,KLOGAD,SPMU,TMTPENSIUN,JENIS_SK,KETERANGAN) 
                 VALUES ('".$NRK."',TO_DATE('".$TMT."', 'DD-MM-YYYY'),'".$KOLOK."','".$KOJAB."','".$KDSORT."',TO_DATE('".$TGAKHIR."', 'DD-MM-YY'),'".$KOPANG."','".$ESELON."',".$PEJTT.",UPPER(
-                  '".$NOSK."'),TO_DATE('".$TGSK."', 'DD-MM-YYYY'),".$KREDIT.",".$STATUS.",'".$USER_ID."','".$term."', SYSDATE,'".$CKOJABF."','".$KLOGAD."','".$SPMU."',TO_DATE('".$TMTPENSIUN."', 'DD-MM-YYYY'),'".$JENSK."')
+                  '".$NOSK."'),TO_DATE('".$TGSK."', 'DD-MM-YYYY'),".$KREDIT.",".$STATUS.",'".$USER_ID."','".$term."', SYSDATE,'".$CKOJABF."','".$KLOGAD."','".$SPMU."',TO_DATE('".$TMTPENSIUN."', 'DD-MM-YYYY'),'".$JENSK."','".$KET."')
             "; 
 
             $idx = $this->db->query($sql);
@@ -734,6 +735,7 @@
         $NOSK = $this->input->post('nosk');
         $TGSK = $this->input->post('tgsk');
         $KREDIT = $this->input->post('kredit');
+        $KET = $this->input->post('keterangan');
         if($KREDIT=='')
         {
             $KREDIT = 0;
@@ -760,7 +762,7 @@
                     ESELON = '".$ESELON."',  PEJTT = '".$PEJTT."',
                     JENIS_SK = '".$JENSK."', 
                     NOSK = UPPER('".$NOSK."'), TGSK = TO_DATE('".$TGSK."', 'DD-MM-YYYY'), KREDIT = '".$KREDIT."', STATUS = '".$STATUS."', USER_ID = '".$USER_ID."', TERM = '".$term."',TG_UPD=SYSDATE,
-                    CKOJABF = '".$CKOJABF."' 
+                    CKOJABF = '".$CKOJABF."' ,KETERANGAN = '".$KET."' 
                 WHERE NRK = '".$NRK."' 
                 AND TMT = TO_DATE('".$TMT."', 'DD-MM-YY') 
                 AND KOLOK = '".$KOLOK_PK."' 
@@ -866,6 +868,7 @@
         $TMTPENSIUN = $this->input->post('tmtpensiun');
         $STATUS = 0;
         $USER_ID = $data['user_id'];
+        $KET = $this->input->post('keterangan');
        
         $term=$this->input->ip_address();
         if($term == '0.0.0.0') {
@@ -899,9 +902,9 @@
 
         if($count == 0)
         {
-            $sql = "INSERT INTO PERS_JABATANF_HIST(NRK,TMT,KOLOK,KOJAB,KDSORT,TGAKHIR,KOPANG,PEJTT,NOSK,TGSK,KREDIT,STATUS,USER_ID,TERM,TG_UPD, KLOGAD, SPMU, TMTPENSIUN, JENIS_SK) 
+            $sql = "INSERT INTO PERS_JABATANF_HIST(NRK,TMT,KOLOK,KOJAB,KDSORT,TGAKHIR,KOPANG,PEJTT,NOSK,TGSK,KREDIT,STATUS,USER_ID,TERM,TG_UPD, KLOGAD, SPMU, TMTPENSIUN, JENIS_SK,KETERANGAN) 
                 VALUES ('".$NRK."',TO_DATE('".$TMT."', 'DD-MM-YYYY'),'".$KOLOK."','".$KOJAB."','".$KDSORT."',TO_DATE('".$TGAKHIR."', 'DD-MM-YYYY'),'".$KOPANG."',".$PEJTT.",
-                UPPER('".$NOSK."'),TO_DATE('".$TGSK."', 'DD-MM-YYYY'),".$KREDIT.",".$STATUS.",'".$USER_ID."','".$term."', SYSDATE, '".$KLOGAD."', '".$SPMU."',TO_DATE('".$TMTPENSIUN."', 'DD-MM-YYYY'),'".$JENSK."')"; 
+                UPPER('".$NOSK."'),TO_DATE('".$TGSK."', 'DD-MM-YYYY'),".$KREDIT.",".$STATUS.",'".$USER_ID."','".$term."', SYSDATE, '".$KLOGAD."', '".$SPMU."',TO_DATE('".$TMTPENSIUN."', 'DD-MM-YYYY'),'".$JENSK."','".$KET."')"; 
             // echo $sql; exit;
             $idx = $this->db->query($sql);
 
@@ -948,6 +951,7 @@
         $TMTPENSIUN = $this->input->post('tmtpensiun');
         $STATUS = 0;
         $USER_ID = $data['user_id'];
+        $KET = $this->input->post('keterangan');
 
        
         $term=$this->input->ip_address();
@@ -963,7 +967,7 @@
                 KOJAB = '".$KOJAB."',  
                 PEJTT = '".$PEJTT."', KOLOK = '".$KOLOK."',
                 NOSK = UPPER('".$NOSK."'), TGSK = TO_DATE('".$TGSK."', 'DD-MM-YYYY'), KREDIT = '".$KREDIT."', STATUS = '".$STATUS."', USER_ID = '".$USER_ID."', TERM = '".$term."', TG_UPD=SYSDATE, KLOGAD = '".$KLOGAD."', SPMU ='".$SPMU."', TMTPENSIUN = TO_DATE('".$TMTPENSIUN."', 'DD-MM-YYYY'),
-                JENIS_SK = '".$JENSK."'
+                JENIS_SK = '".$JENSK."',KETERANGAN = '".$KET."'
                 WHERE NRK = '".$NRK."' 
                 AND TMT = TO_DATE('".$TMT."', 'DD-MM-YY') 
                 AND KOJAB = '".$KOJAB_PK."'"; 
@@ -1098,6 +1102,8 @@
         $TITELDEPAN = $this->input->post('titeldepan');
         $USER_ID = $data['user_id'];
         $STAT = $this->input->post('stat_app');
+
+        $KET = $this->input->post('keterangan');
       
         $term = $this->input->ip_address();
         if($term == '0.0.0.0') {
@@ -1121,7 +1127,7 @@
         {
             //$sql = "INSERT INTO PERS_PENDIDIKAN(NRK,JENDIK,KODIK,NASEK,UNIVER,KOTSEK,TGIJAZAH,NOIJAZAH,TGACCKOP,NOACCKOP,TGMULAI,TGAKHIR,JUMJAM,SELENGGARA,USER_ID,TERM,TG_UPD,ANGKATAN,TITELDEPAN,TITELBELAKANG,STAT_APP) VALUES ('".$NRK."',".$JENDIK.",'".$KODIK."','".$NASEK."','".$UNIVER."',UPPER('".$KOTSEK."'),TO_DATE('".$TGIJAZAH."', 'DD-MM-YYYY'),UPPER('".$NOIJAZAH."'),TO_DATE('".$TGACCKOP."', 'DD-MM-YYYY'),UPPER('".$NOACCKOP."'),TO_DATE('".$TGMULAI."', 'DD-MM-YYYY'),TO_DATE('".$TGAKHIR."', 'DD-MM-YYYY'),".$JUMJAM.",'".$SELENGGARA."','".$USER_ID."','".$term."', SYSDATE,'".$ANGKATAN."','".$TITELDEPAN."','".$TITEL."','".$STAT."')"; 
 
-             $sql = "INSERT INTO PERS_PENDIDIKAN(NRK,JENDIK,KODIK,NASEK,UNIVER,KOTSEK,TGIJAZAH,NOIJAZAH,TGACCKOP,NOACCKOP,TGMULAI,TGAKHIR,JUMJAM,SELENGGARA,USER_ID,TERM,TG_UPD,ANGKATAN,TITELDEPAN,TITELBELAKANG,STAT_APP,KD_STLU,TG_STLU,NO_STLU) VALUES ('".$NRK."',".$JENDIK.",'".$KODIK."','".$NASEK."','".$UNIVER."',UPPER('".$KOTSEK."'),TO_DATE('".$TGIJAZAH."', 'DD-MM-YYYY'),UPPER('".$NOIJAZAH."'),TO_DATE('".$TGACCKOP."', 'DD-MM-YYYY'),UPPER('".$NOACCKOP."'),TO_DATE('".$TGMULAI."', 'DD-MM-YYYY'),TO_DATE('".$TGAKHIR."', 'DD-MM-YYYY'),".$JUMJAM.",'".$SELENGGARA."','".$USER_ID."','".$term."', SYSDATE,'".$ANGKATAN."','".$TITELDEPAN."','".$TITEL."','".$STAT."','$KDSTLU',TO_DATE('".$TGSTLU."', 'DD-MM-YYYY'),UPPER('".$NOSTLU."'))"; 
+             $sql = "INSERT INTO PERS_PENDIDIKAN(NRK,JENDIK,KODIK,NASEK,UNIVER,KOTSEK,TGIJAZAH,NOIJAZAH,TGACCKOP,NOACCKOP,TGMULAI,TGAKHIR,JUMJAM,SELENGGARA,USER_ID,TERM,TG_UPD,ANGKATAN,TITELDEPAN,TITELBELAKANG,STAT_APP,KD_STLU,TG_STLU,NO_STLU,KETERANGAN) VALUES ('".$NRK."',".$JENDIK.",'".$KODIK."','".$NASEK."','".$UNIVER."',UPPER('".$KOTSEK."'),TO_DATE('".$TGIJAZAH."', 'DD-MM-YYYY'),UPPER('".$NOIJAZAH."'),TO_DATE('".$TGACCKOP."', 'DD-MM-YYYY'),UPPER('".$NOACCKOP."'),TO_DATE('".$TGMULAI."', 'DD-MM-YYYY'),TO_DATE('".$TGAKHIR."', 'DD-MM-YYYY'),".$JUMJAM.",'".$SELENGGARA."','".$USER_ID."','".$term."', SYSDATE,'".$ANGKATAN."','".$TITELDEPAN."','".$TITEL."','".$STAT."','$KDSTLU',TO_DATE('".$TGSTLU."', 'DD-MM-YYYY'),UPPER('".$NOSTLU."'),'".$KET."')"; 
             $id = $this->db->query($sql);
 
             if($id){
@@ -1257,6 +1263,7 @@
         $TITEL = $this->input->post('titel');
         $TITELDEPAN = $this->input->post('titeldepan');
         $USER_ID = $data['user_id'];
+        $KET = $this->input->post('keterangan');
         $STAT=$this->input->post('stat_app');
         $term = $this->input->ip_address();
         if($term == '0.0.0.0') {
@@ -1339,14 +1346,14 @@
 
             $sql = "UPDATE PERS_PENDIDIKAN SET NASEK = '".$NASEK."', UNIVER = '".$UNIVER."', KOTSEK = UPPER('".$KOTSEK."'), TGIJAZAH = TO_DATE('".$TGIJAZAH."', 'DD-MM-YYYY'), NOIJAZAH = UPPER('".$NOIJAZAH."'), 
                 TGACCKOP = TO_DATE('".$TGACCKOP."', 'DD-MM-YYYY'),  NOACCKOP = UPPER('".$NOACCKOP."'), TGMULAI = TO_DATE('".$TGMULAI."', 'DD-MM-YYYY'), TGAKHIR = TO_DATE('".$TGAKHIR."', 'DD-MM-YYYY'), KD_STLU = '$KDSTLU', TG_STLU = TO_DATE('".$TGSTLU."', 'DD-MM-YYYY'), NO_STLU = '$NOSTLU',
-                JUMJAM = '".$JUMJAM."', SELENGGARA = '".$SELENGGARA."', USER_ID = '".$USER_ID."', TERM = '".$term."', TG_UPD = SYSDATE, ANGKATAN = '".$ANGKATAN."',TITELDEPAN='".$TITELDEPAN."',TITELBELAKANG='".$TITEL."',STAT_APP = '".$STAT."'
+                JUMJAM = '".$JUMJAM."', SELENGGARA = '".$SELENGGARA."', USER_ID = '".$USER_ID."', TERM = '".$term."', TG_UPD = SYSDATE, ANGKATAN = '".$ANGKATAN."',TITELDEPAN='".$TITELDEPAN."',TITELBELAKANG='".$TITEL."',STAT_APP = '".$STAT."',KETERANGAN = '".$KET."'
                 WHERE NRK = '".$NRK."' AND JENDIK = '".$JENDIK."' AND KODIK = '".$KODIK."'";    
         }
         else
         {
             $sql = "UPDATE PERS_PENDIDIKAN SET NASEK = '".$NASEK."', UNIVER = '".$UNIVER."', KOTSEK = UPPER('".$KOTSEK."'), TGIJAZAH = TO_DATE('".$TGIJAZAH."', 'DD-MM-YYYY'), NOIJAZAH = UPPER('".$NOIJAZAH."'), 
                 TGACCKOP = TO_DATE('".$TGACCKOP."', 'DD-MM-YYYY'),  NOACCKOP = UPPER('".$NOACCKOP."'), TGMULAI = TO_DATE('".$TGMULAI."', 'DD-MM-YYYY'), TGAKHIR = TO_DATE('".$TGAKHIR."', 'DD-MM-YYYY'), KD_STLU = '$KDSTLU', TG_STLU = TO_DATE('".$TGSTLU."', 'DD-MM-YYYY'), NO_STLU = '$NOSTLU',
-                JUMJAM = '".$JUMJAM."', SELENGGARA = '".$SELENGGARA."', USER_ID = '".$USER_ID."', TERM = '".$term."', TG_UPD = SYSDATE, ANGKATAN = '".$ANGKATAN."',TITELDEPAN='".$TITELDEPAN."',TITELBELAKANG='".$TITEL."',STAT_APP = '".$STAT."'
+                JUMJAM = '".$JUMJAM."', SELENGGARA = '".$SELENGGARA."', USER_ID = '".$USER_ID."', TERM = '".$term."', TG_UPD = SYSDATE, ANGKATAN = '".$ANGKATAN."',TITELDEPAN='".$TITELDEPAN."',TITELBELAKANG='".$TITEL."',STAT_APP = '".$STAT."',KETERANGAN = '".$KET."'
                 WHERE NRK = '".$NRK."' AND JENDIK = '".$JENDIK."' AND KODIK = '".$KODIK."'"; 
         }
      
@@ -1493,6 +1500,7 @@
 
         $ANGKATAN = $this->input->post('angkatan');
         $STAT= $this->input->post('stat_app');
+        $KET = $this->input->post('keterangan');
         $USER_ID = $data['user_id'];
       
         $term = $this->input->ip_address();
@@ -1511,11 +1519,11 @@
         else if($cek == null)
         {
             $sql = "INSERT INTO PERS_PENDIDIKAN(NRK,JENDIK,KODIK,NASEK,UNIVER,KOTSEK,TGIJAZAH,NOIJAZAH,TGACCKOP,NOACCKOP,TGMULAI,TGAKHIR,JUMJAM,SELENGGARA,
-                USER_ID,TERM,TG_UPD,ANGKATAN,STAT_APP) 
+                USER_ID,TERM,TG_UPD,ANGKATAN,STAT_APP,KETERANGAN) 
                 VALUES ('".$NRK."',".$JENDIK.",'".$KODIK."','".$NASEK."','".$UNIVER."',UPPER('".$KOTSEK."'),TO_DATE('".$TGIJAZAH."', 'DD-MM-YYYY'),UPPER('".$NOIJAZAH."'),
                 TO_DATE('".$TGACCKOP."', 'DD-MM-YYYY'),UPPER('".$NOACCKOP."'),TO_DATE('".$TGMULAI."', 'DD-MM-YYYY'),TO_DATE('".$TGAKHIR."', 'DD-MM-YYYY'),".$JUMJAM.",UPPER('".$SELENGGARA."'),
                
-                '".$USER_ID."','".$term."', SYSDATE,UPPER('".$ANGKATAN."'),'".$STAT."')"; 
+                '".$USER_ID."','".$term."', SYSDATE,UPPER('".$ANGKATAN."'),'".$STAT."','".$KET."')"; 
             
             $id = $this->db->query($sql);
         }
@@ -1586,6 +1594,8 @@
 
         $ANGKATAN = $this->input->post('angkatan');
         $USER_ID = $data['user_id'];
+
+        $KET = $this->input->post('keterangan');
        
         $term = $this->input->ip_address();
         if($term == '0.0.0.0') {
@@ -1657,14 +1667,14 @@
             $sql = "UPDATE PERS_PENDIDIKAN SET NASEK = '".$NASEK."', UNIVER = '".$UNIVER."', KOTSEK = UPPER('".$KOTSEK."'), TGIJAZAH = TO_DATE('".$TGIJAZAH."', 'DD-MM-YYYY'), NOIJAZAH = UPPER('".$NOIJAZAH."'), 
                             TGACCKOP = TO_DATE('".$TGACCKOP."', 'DD-MM-YYYY'),  NOACCKOP = UPPER('".$NOACCKOP."'), TGMULAI = TO_DATE('".$TGMULAI."', 'DD-MM-YYYY'), TGAKHIR = TO_DATE('".$TGAKHIR."', 'DD-MM-YYYY'), 
                             JUMJAM = '".$JUMJAM."', SELENGGARA = UPPER('".$SELENGGARA."'), 
-                            USER_ID = '".$USER_ID."', TERM = '".$term."', TG_UPD=SYSDATE, ANGKATAN = UPPER('".$ANGKATAN."'), STAT_APP = '".$STAT."'
+                            USER_ID = '".$USER_ID."', TERM = '".$term."', TG_UPD=SYSDATE, ANGKATAN = UPPER('".$ANGKATAN."'), STAT_APP = '".$STAT."',KETERANGAN = '".$KET."'
                             WHERE NRK = '".$NRK."' AND JENDIK = '".$JENDIK."' AND KODIK = '".$KODIK."'";         
         }
         else
         {
             $sql = "UPDATE PERS_PENDIDIKAN SET NASEK = '".$NASEK."', UNIVER = '".$UNIVER."', KOTSEK = UPPER('".$KOTSEK."'), TGIJAZAH = TO_DATE('".$TGIJAZAH."', 'DD-MM-YYYY'), NOIJAZAH = UPPER('".$NOIJAZAH."'), 
                             TGACCKOP = TO_DATE('".$TGACCKOP."', 'DD-MM-YYYY'),  NOACCKOP = UPPER('".$NOACCKOP."'), TGMULAI = TO_DATE('".$TGMULAI."', 'DD-MM-YYYY'), TGAKHIR = TO_DATE('".$TGAKHIR."', 'DD-MM-YYYY'), 
-                            JUMJAM = '".$JUMJAM."', SELENGGARA = UPPER('".$SELENGGARA."'), USER_ID = '".$USER_ID."', TERM = '".$term."', TG_UPD=SYSDATE, ANGKATAN = UPPER('".$ANGKATAN."'), STAT_APP = '".$STAT."'
+                            JUMJAM = '".$JUMJAM."', SELENGGARA = UPPER('".$SELENGGARA."'), USER_ID = '".$USER_ID."', TERM = '".$term."', TG_UPD=SYSDATE, ANGKATAN = UPPER('".$ANGKATAN."'), STAT_APP = '".$STAT."',KETERANGAN = '".$KET."'
                             WHERE NRK = '".$NRK."' AND JENDIK = '".$JENDIK."' AND KODIK = '".$KODIK."'";    
         }
     

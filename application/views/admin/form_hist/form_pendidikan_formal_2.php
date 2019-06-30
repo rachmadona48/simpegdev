@@ -400,6 +400,14 @@
                                 </div>
                                 
                     <?php } ?>
+
+                    <div class="form-group pickerpicker">
+                        <label class="col-sm-4 control-label">Keterangan</label>
+                        <div class="input-group col-sm-7">
+                            <textarea class="form-control" name="keterangan" id="keterangan" maxlength="100" placeholder="Keterangan"><?php echo isset($infoPendidikan->KETERANGAN) ? $infoPendidikan->KETERANGAN:""; ?></textarea>
+                        </div>         
+                    </div>
+
                 </div>
                 <!-- END SIDE 1 -->
                 <!-- START SIDE 2 -->

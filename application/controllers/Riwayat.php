@@ -675,6 +675,8 @@ class Riwayat extends CI_Controller {
             $nrk = $this->user['id'];
         }
 
+        // echo 'tes';exit();
+
         // END GET NRK
         if($ug == 11 || $ug == 4|| $ug == 47 || $ug == 5)
         {

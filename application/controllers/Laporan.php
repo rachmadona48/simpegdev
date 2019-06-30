@@ -3562,9 +3562,35 @@ class Laporan extends CI_Controller {
             $valnrk="";
         } 
 
+
+        // echo $res;
+        // echo '<br>';
+        
+        // echo $v2;
+        // echo '<br>';
+
+        // echo $v3;
+        // echo '<br>';
+
+        // echo $v4;
+        // echo '<br>';
+
+        // echo $v6;
+        // echo '<br>';
+
+        // echo $v7;
+        // echo '<br>';
+
+        // echo $valnrk;
+        // echo '<br>';
+
+        // echo $nrkP;
+        // echo '<br>';
        
-        require "http://10.15.34.34:8080/JavaBridge/java/Java.inc";
-		// require "http://localhost:8080/JavaBridge/java/Java.inc";
+       // echo realpath(".") . "/public/report/";
+
+        // require "http://10.15.34.34:8080/JavaBridge/java/Java.inc";
+		require "http://localhost:8080/JavaBridge/java/Java.inc";
         
         $system = new Java('java.lang.System');
 
@@ -3624,19 +3650,12 @@ class Laporan extends CI_Controller {
         // $path = './path/to/file.pdf';
 
         if (file_exists($outputPath)) {
-            // echo "Create PDF berhasil." . $outputPath;
-            // if ($dwl == 1) {
-            //  $this->load->helper('download');
-            //  force_download($outputPath, NULL);
-            // } else {
             header('Content-Type: application/pdf');
             header('Content-Disposition: inline; filename=' . $filename);
             header('Content-Transfer-Encoding: binary');
             header('Accept-Ranges: bytes');
 
             readfile($outputPath);
-            //unlink($outputPath);
-            // }
 
         } else {
             echo "Create PDF gagal.";

@@ -358,7 +358,7 @@ class Infopegawai {
 
         $sql = "SELECT
                 a.NRK, to_char(a.TMT, 'YYYY-MM-DD') TMT, a.NOSK, to_char(a.TGSK, 'YYYY-MM-DD') TGSK, a.KOLOK, b.NALOKL,
-                a.KOJAB, c.NAJABL, a.USER_ID, to_char(a.TG_UPD, 'DD-MM-YYYY HH24:MM:SS') TG_UPD, a.TERM, a.STATUS, a.USER_ID,d.NAPANG,d.GOL,a.ESELON,a.KLOGAD,a.SPMU,f.NALOKL as NAKLOGAD,g.NAMA AS NAMA_SPM,a.PEJTT,h.KETERANGAN as KET_PEJTT,to_char(a.TMTPENSIUN, 'YYYY-MM-DD') TMTPENSIUN,a.KREDIT,a.JENIS_SK,i.KETERANGAN AS KET_JENSK
+                a.KOJAB, c.NAJABL, a.USER_ID, to_char(a.TG_UPD, 'DD-MM-YYYY HH24:MM:SS') TG_UPD, a.TERM, a.STATUS, a.USER_ID,d.NAPANG,d.GOL,a.ESELON,a.KLOGAD,a.SPMU,f.NALOKL as NAKLOGAD,g.NAMA AS NAMA_SPM,a.PEJTT,h.KETERANGAN as KET_PEJTT,to_char(a.TMTPENSIUN, 'YYYY-MM-DD') TMTPENSIUN,a.KREDIT,a.JENIS_SK,i.KETERANGAN AS KET_JENSK,a.KETERANGAN as KET_HIST
                 FROM PERS_JABATAN_HIST a
                 LEFT JOIN PERS_LOKASI_TBL b ON a.KOLOK = b.KOLOK
                 LEFT JOIN PERS_KOJAB_TBL c ON a.KOJAB = c.KOJAB AND a.KOLOK = c.KOLOK
@@ -407,9 +407,9 @@ class Infopegawai {
                         <th>Jenis SK</th>
                         <th>No.SK <br/> <strong><small class='text-navy'>(Tgl. SK)</small></strong></th>
                         <th>Pejabat Penanda Tangan</th>
-                        
                         <th>Kredit</th>
                         <th>User ID <br/><strong><small class='text-navy'>(Tgl. Update)</small></strong></th>
+                        <th>Ket</th>
                         <th>Aksi</th>
                     </tr>";
         $table .= "</thead>";
@@ -492,13 +492,16 @@ class Infopegawai {
                 }
 
                 $table .= "<td>".$row->USER_ID."<br><strong><small class='text-navy'>(".$row->TG_UPD.")</small></strong></td>";
+                $table .= "<td>".$row->KET_HIST."</td>";
                 $table .= "<td >";
+
                     if($accUpd == 'Y'){
                 $table.= "<button type='button' class='btn btn-outline btn-xs btn-success' title='Edit' onClick='getForm(\"jabatan_hist\",\"update\",\"".$row->NRK."\",\"".date('d-m-Y', strtotime($row->TMT))."\",\"".$row->KOLOK."\",\"".$row->KOJAB."\");'><i class='fa fa-pencil-square'></i></button> &nbsp;";
                     }
                 //     if($accDelFlag == 'Y'){                                
                 // $table .="<button type='button' class='btn btn-outline btn-xs btn-danger' title='Hapus' onClick='confirmHapusDataFlag(\"jabatan_hist\",\"".$row->NRK."\",\"".date('d-m-Y', strtotime($row->TMT))."\",\"".$row->KOLOK."\",\"".$row->KOJAB."\");'><i class='fa fa-trash'></i></button> &nbsp;";
                 //     }
+                
                     if($accDel == 'Y'){                                
                 $table .="<button type='button' class='btn btn-outline btn-xs btn-danger' title='Hapus ' onClick='confirmHapusData(\"jabatan_hist\",\"".$row->NRK."\",\"".date('d-m-Y', strtotime($row->TMT))."\",\"".$row->KOLOK."\",\"".$row->KOJAB."\");'><i class='fa fa-trash'></i></button>";
                     }
@@ -529,7 +532,7 @@ class Infopegawai {
     
         $sql = "SELECT
                 a.NRK, to_char(a.TMT, 'YYYY-MM-DD') TMT, a.NOSK, to_char(a.TGSK, 'YYYY-MM-DD') TGSK, a.KOLOK, b.NALOKL,
-                a.KOJAB, c.NAJABL, a.USER_ID, to_char(a.TG_UPD, 'DD-MM-YYYY HH24:MM:SS') TG_UPD, a.TERM, a.STATUS, a.USER_ID,d.NAPANG,d.GOL,a.ESELON,a.KLOGAD,a.SPMU,f.NALOKL as NAKLOGAD,g.NAMA AS NAMA_SPM,a.PEJTT,h.KETERANGAN as KET_PEJTT,to_char(a.TMTPENSIUN, 'YYYY-MM-DD') TMTPENSIUN,a.KREDIT,a.JENIS_SK,i.KETERANGAN AS KET_JENSK
+                a.KOJAB, c.NAJABL, a.USER_ID, to_char(a.TG_UPD, 'DD-MM-YYYY HH24:MM:SS') TG_UPD, a.TERM, a.STATUS, a.USER_ID,d.NAPANG,d.GOL,a.ESELON,a.KLOGAD,a.SPMU,f.NALOKL as NAKLOGAD,g.NAMA AS NAMA_SPM,a.PEJTT,h.KETERANGAN as KET_PEJTT,to_char(a.TMTPENSIUN, 'YYYY-MM-DD') TMTPENSIUN,a.KREDIT,a.JENIS_SK,i.KETERANGAN AS KET_JENSK,a.KETERANGAN as KET_HIST
                 FROM PERS_JABATAN_HIST a
                 LEFT JOIN PERS_LOKASI_TBL b ON a.KOLOK = b.KOLOK
                 LEFT JOIN PERS_KOJAB_TBL c ON a.KOJAB = c.KOJAB AND a.KOLOK = c.KOLOK
@@ -646,7 +649,7 @@ class Infopegawai {
 
         $sql = "SELECT
                 a.NRK, to_char(a.TMT, 'YYYY-MM-DD') TMT, a.NOSK, to_char(a.TGSK, 'YYYY-MM-DD') TGSK, a.KOLOK, b.NALOKL,
-                a.KOJAB, c.NAJABL, a.USER_ID, to_char(a.TG_UPD, 'DD-MM-YYYY HH24:MM:SS') TG_UPD, a.TERM, a.STATUS, a.USER_ID,d.NAPANG,d.GOL,a.KLOGAD,e.NALOKL as NAKLOGAD,a.SPMU,f.NAMA as NAMA_SPM,g.KETERANGAN as KET_PEJTT,to_char(a.TMTPENSIUN, 'YYYY-MM-DD') TMTPENSIUN,a.KREDIT,a.JENIS_SK,h.KETERANGAN AS KET_JENSK
+                a.KOJAB, c.NAJABL, a.USER_ID, to_char(a.TG_UPD, 'DD-MM-YYYY HH24:MM:SS') TG_UPD, a.TERM, a.STATUS, a.USER_ID,d.NAPANG,d.GOL,a.KLOGAD,e.NALOKL as NAKLOGAD,a.SPMU,f.NAMA as NAMA_SPM,g.KETERANGAN as KET_PEJTT,to_char(a.TMTPENSIUN, 'YYYY-MM-DD') TMTPENSIUN,a.KREDIT,a.JENIS_SK,h.KETERANGAN AS KET_JENSK,a.KETERANGAN as KET_HIST
                 FROM PERS_JABATANF_HIST a
                 LEFT JOIN PERS_LOKASI_TBL b ON a.KOLOK = b.KOLOK
                 LEFT JOIN PERS_KOJABF_TBL c ON a.KOJAB = c.KOJAB
@@ -696,6 +699,7 @@ class Infopegawai {
                         <th>TMT Pensiun </th>
                         <th>Kredit</th>
                         <th>User ID <br/><strong><small class='text-navy'>(Tgl. Update)</small></strong></th>
+                        <th>Ket</th>
                         <th>Aksi</th> 
                     </tr>";
         $table .= "</thead>";
@@ -779,6 +783,7 @@ class Infopegawai {
                 }
                 $table .= "<td>".$row->KREDIT."</td>";
                 $table .= "<td>".$row->USER_ID."<br><strong><small class='text-navy'>(".$row->TG_UPD.")</small></strong></td>";
+                $table .= "<td>".$row->KET_HIST."</td>";
                 $table .= "<td >";
                 if($accUpd == 'Y'){
                 $table .="<button type='button' class='btn btn-outline btn-xs btn-success' title='Edit' onClick='getForm(\"jabatanf_hist\",\"update\",\"".$row->NRK."\",\"".date('d-m-Y', strtotime($row->TMT))."\",\"".$row->KOJAB."\");'><i class='fa fa-pencil-square'></i></button> &nbsp;"; 
@@ -1121,7 +1126,8 @@ class Infopegawai {
                     C.KET_STATUS,
                     D.NADIK,
                     TO_CHAR(A.TG_UPD,'DD-MM-YYYY HH24:MI:SS') TG_UPD,
-                    A.USER_ID
+                    A.USER_ID,
+                    A.KETERANGAN as KET_HIST
                 FROM
                     PERS_PENDIDIKAN A
                 LEFT JOIN PERS_UNIVER_TBL B ON A .UNIVER = B.KDUNIVER
@@ -1177,6 +1183,7 @@ class Infopegawai {
                         
                         
                         <th>User ID <br/><strong><small class='text-navy'>(Tgl. Update)</small></strong></th>
+                        <th>Ket</th>
                         <th>Aksi</th>
                     </tr>";
         $table .= "</thead>";
@@ -1279,6 +1286,7 @@ class Infopegawai {
                 
                 //$table .= "<td>".$row->KET_STATUS."</td>";
                 $table .= "<td>".$row->USER_ID."<br><strong><small class='text-navy'>(".$row->TG_UPD.")</small></strong></td>";
+                $table .= "<td>".$row->KET_HIST."</td>";
                 $table .= "<td>";
                 if($accUpd == 'Y')
                 {
@@ -1483,7 +1491,7 @@ class Infopegawai {
         $accDel=$access['mnac']->act_delete;
         // $accDelFlag=$access['mnac']->act_delete_flag;
         $sql = "SELECT A.NRK, TO_CHAR(A.TGIJAZAH,'DD-MM-YYYY') AS TGIJAZAH, A.NOIJAZAH, A.NASEK, A.UNIVER, A.USER_ID, A.TERM, A.TG_UPD, A.JENDIK, A.KODIK,
-                A.SELENGGARA, B.KET_STATUS, TO_CHAR(A.TG_UPD,'DD-MM-YYYY HH24:MI:SS') AS TG_UPD, A.USER_ID,D.NADIK
+                A.SELENGGARA, B.KET_STATUS, TO_CHAR(A.TG_UPD,'DD-MM-YYYY HH24:MI:SS') AS TG_UPD, A.USER_ID,D.NADIK,a.KETERANGAN as KET_HIST
                 FROM PERS_PENDIDIKAN A 
                 LEFT JOIN PERS_STATUS_APPROVAL B ON A.STAT_APP = B.KD_STATUS
                 LEFT JOIN PERS_PDIDIKAN_TBL D ON A.JENDIK = D.JENDIK AND A.KODIK = D.KODIK
@@ -1533,6 +1541,7 @@ class Infopegawai {
                         <th>Nama Lembaga</th>
                         <th>Penyelenggara</th>
                         <th>User ID <br/><strong><small class='text-navy'>(Tgl. Update)</small></strong></th>
+                        <th>Ket</th>
                         <th>Aksi</th>
                     </tr>";
         $table .= "</thead>";
@@ -1546,6 +1555,7 @@ class Infopegawai {
                 $table .= "<td>".$row->SELENGGARA."</td>";
                 //$table .= "<td>".$row->KET_STATUS."</td>";
                 $table .= "<td>".$row->USER_ID."<br><strong><small class='text-navy'>(".$row->TG_UPD.")</small></strong></td>";
+                $table .= "<td>".$row->KET_HIST."</td>";
                 $table .= "<td>";
                 if($accUpd == 'Y'){
                     $table.= "<button type='button' class='btn btn-outline btn-xs btn-success' title='Edit' onClick='getForm(\"pendidikan_nonformal_2\",\"update\",\"".$row->NRK."\",\"".$row->JENDIK."\",\"".$row->KODIK."\");'><i class='fa fa-pencil-square'></i></button> &nbsp;";
@@ -8169,12 +8179,12 @@ class Infopegawai {
 
     public function getKojabHistBy($nrk,$tmt,$kolok,$kojab){
         $sql = "SELECT a.NRK, to_char(a.TMT, 'DD-MM-YYYY') TMT, a.NOSK, to_char(a.TGSK, 'DD-MM-YYYY') TGSK, a.KOLOK, a.KOJAB, a.CKOJABF,
-                a.KDSORT, a.KREDIT, a.STATUS, a.PEJTT, to_char(a.TGAKHIR, 'DD-MM-YYYY') TGAKHIR, a.ESELON, a.KOPANG, a.KLOGAD, a.SPMU, to_char(a.TMTPENSIUN, 'DD-MM-YYYY') TMTPENSIUN, A .JENIS_SK
+                a.KDSORT, a.KREDIT, a.STATUS, a.PEJTT, to_char(a.TGAKHIR, 'DD-MM-YYYY') TGAKHIR, a.ESELON, a.KOPANG, a.KLOGAD, a.SPMU, to_char(a.TMTPENSIUN, 'DD-MM-YYYY') TMTPENSIUN, A .JENIS_SK,a.KETERANGAN
                 FROM PERS_JABATAN_HIST a
                 WHERE a.NRK = '".$nrk."' AND a.TMT = TO_DATE('".$tmt."', 'DD-MM-YYYY') AND a.KOLOK = '".$kolok."' AND a.KOJAB = '".$kojab."'
                 ORDER BY a.TMT DESC, a.KOLOK, a.KOJAB
                 ";
-        // var_dump($sql);exit;
+        // echo($sql);exit;
 
         $query = $this->ci->db->query($sql)->row();        
         
@@ -8183,7 +8193,7 @@ class Infopegawai {
 
     public function getKojabfHistBy($nrk,$tmt,$kojab){
         $sql = "SELECT a.NRK, to_char(a.TMT, 'DD-MM-YYYY') TMT, a.NOSK, to_char(a.TGSK, 'DD-MM-YYYY') TGSK, a.KOLOK, a.KOJAB,
-                a.KDSORT, a.KREDIT, a.STATUS, a.PEJTT, to_char(a.TGAKHIR, 'DD-MM-YYYY') TGAKHIR, a.KOPANG,a.KLOGAD, a.SPMU, to_char(a.TMTPENSIUN, 'DD-MM-YYYY') TMTPENSIUN, A .JENIS_SK
+                a.KDSORT, a.KREDIT, a.STATUS, a.PEJTT, to_char(a.TGAKHIR, 'DD-MM-YYYY') TGAKHIR, a.KOPANG,a.KLOGAD, a.SPMU, to_char(a.TMTPENSIUN, 'DD-MM-YYYY') TMTPENSIUN, A .JENIS_SK,a.KETERANGAN
                 FROM PERS_JABATANF_HIST a
                 WHERE a.NRK = '".$nrk."' AND a.TMT = TO_DATE('".$tmt."', 'DD-MM-YYYY') AND a.KOJAB = '".$kojab."'
                 ORDER BY a.TMT DESC, a.KOLOK, a.KOJAB
@@ -8203,7 +8213,7 @@ class Infopegawai {
 
          $sql = "SELECT NRK, JENDIK, KODIK, NASEK, UNIVER, KOTSEK, to_char(TGIJAZAH, 'DD-MM-YYYY') TGIJAZAH, NOIJAZAH,
                 to_char(TGACCKOP, 'DD-MM-YYYY') TGACCKOP, NOACCKOP, to_char(TGMULAI, 'DD-MM-YYYY') TGMULAI, 
-                to_char(TGAKHIR, 'DD-MM-YYYY') TGAKHIR, JUMJAM, SELENGGARA, ANGKATAN,TITELDEPAN,TITELBELAKANG,STAT_APP,to_char(TG_STLU, 'DD-MM-YYYY') TG_STLU, NO_STLU,KD_STLU
+                to_char(TGAKHIR, 'DD-MM-YYYY') TGAKHIR, JUMJAM, SELENGGARA, ANGKATAN,TITELDEPAN,TITELBELAKANG,STAT_APP,to_char(TG_STLU, 'DD-MM-YYYY') TG_STLU, NO_STLU,KD_STLU,KETERANGAN
                 FROM PERS_PENDIDIKAN WHERE NRK = '".$nrk."' AND JENDIK = '".$jendik."' AND KODIK = '".$kodik."'
                 ";
 

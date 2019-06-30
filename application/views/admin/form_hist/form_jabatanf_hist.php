@@ -258,7 +258,14 @@
 -->
                             <!--<input type="text" id="kredit" name="kredit" maxlength="4" onkeypress="return validateQty(this,event);" placeholder="Kredit" value="<?php echo isset($infoJabatan->KREDIT) ? $infoJabatan->KREDIT : ""; ?>" class="form-control">
                         </div>-->
-                    </div>                              
+                    </div>  
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">KETERANGAN</label>
+                        <div class="col-sm-8">
+                            <textarea class="form-control" name="keterangan" id="keterangan" maxlength="100" placeholder="Keterangan"><?php echo isset($infoJabatan->KETERANGAN) ? $infoJabatan->KETERANGAN:""; ?></textarea>
+                        </div>         
+                    </div>                            
                 
                     <!--<div class="form-group">
                         <label class="col-sm-4 control-label">STATUS</label>                    
