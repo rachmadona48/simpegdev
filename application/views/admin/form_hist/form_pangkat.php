@@ -360,6 +360,14 @@
                     </div>
                     <input type="hidden" id="stapegpeg1" name="stapegpeg1" value="">
 
+
+                    <div class="form-group pickerpicker">
+                        <label class="col-sm-4 control-label">Keterangan</label>
+                        <div class="col-sm-7">
+                            <textarea class="form-control" name="keterangan" id="keterangan" maxlength="100" placeholder="Keterangan"><?php echo isset($infoPangkat->KETERANGAN) ? $infoPangkat->KETERANGAN:""; ?></textarea>
+                        </div>         
+                    </div>
+
                 </div>
                 <!-- END SIDE 2 -->
             </div>	            			            			        	

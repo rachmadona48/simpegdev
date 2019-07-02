@@ -415,6 +415,13 @@
                                 <abbr class="search-choice-close"></abbr>
                             </div>
                         </div>
+
+                        <div class="form-group pickerpicker">
+                            <label class="col-sm-4 control-label">Keterangan</label>
+                            <div class="input-group col-sm-7">
+                                <textarea class="form-control" name="keterangan" id="keterangan" maxlength="100" placeholder="Keterangan"><?php echo isset($infoKeluarga->KETERANGAN) ? $infoKeluarga->KETERANGAN:""; ?></textarea>
+                            </div>         
+                        </div>  
                     </div>               
             </div>   
                                  

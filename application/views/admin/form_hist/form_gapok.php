@@ -364,6 +364,15 @@
        				<input type="hidden" id="stapeg" name="stapeg" placeholder="STAPEG" value="<?php echo isset($stapeg->STAPEG) ? $stapeg->STAPEG : ""; ?>" class="form-control" readonly="readonly">
        				<input type="hidden" id="kojab" name="kojab" placeholder="KOJAB" value="<?php echo isset($stapeg->KOJAB) ? $stapeg->KOJAB : ""; ?>" class="form-control" readonly="readonly">
                     <input type="hidden" id="stapegpeg1" name="stapegpeg1">
+
+
+
+                    <div class="form-group pickerpicker">
+                        <label class="col-sm-4 control-label">Keterangan</label>
+                        <div class="col-sm-7">
+                            <textarea class="form-control" name="keterangan" id="keterangan" maxlength="100" placeholder="Keterangan"><?php echo isset($infoGapok->KETERANGAN) ? $infoGapok->KETERANGAN:""; ?></textarea>
+                        </div>         
+                    </div>
                 </div>
                 <!-- END SIDE 2 -->
             </div>	            			            			        	

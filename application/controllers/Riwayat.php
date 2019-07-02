@@ -866,6 +866,8 @@ class Riwayat extends CI_Controller {
             default:
                 $hasil = "<small class='text-danger'>Tidak Ada Riwayat Yang Ditampilkan</small>";
                 break;
+
+            // echo $hasil;exit();
             }
         }
         
@@ -1447,7 +1449,7 @@ class Riwayat extends CI_Controller {
                 
                 break;
 
-             case 'skp':                
+            case 'skp':                
                 $action = $this->input->post('action');//action
                 $nrk = $this->input->post('nrk');//nrk
                 $nrk2 = $this->input->post('key1');//nrk

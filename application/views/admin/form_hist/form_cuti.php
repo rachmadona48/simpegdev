@@ -104,6 +104,14 @@
                           </select>
     	              </div>
     	            </div>
+
+                    <div class="form-group pickerpicker">
+                        <label class="col-sm-4 control-label">Keterangan</label>
+                        <div class="col-sm-8">
+                            <textarea class="form-control" name="keterangan" id="keterangan" maxlength="100" placeholder="Keterangan"><?php echo isset($infoCuti->KETERANGAN) ? $infoCuti->KETERANGAN:""; ?></textarea>
+                        </div>         
+                    </div>
+
                     <div class="hr-line-dashed"></div>
                 </div>
                 <!-- END SIDE 1 -->            

@@ -1909,6 +1909,7 @@
         $JENSK = $this->input->post('jensk');
         $NOSK = $this->input->post('nosk');
         $TGSK = $this->input->post('tgsk');
+        $KET = $this->input->post('keterangan');
         $USER_ID = $data['user_id'];
        
         $term = $this->input->ip_address();
@@ -1936,8 +1937,8 @@
 
             }*/
 
-            $sql = "INSERT INTO PERS_PANGKAT_HIST(NRK,TMT,KOPANG,TTMASKER,BBMASKER,KOLOK,GAPOK,PEJTT,NOSK,TGSK,USER_ID,TERM,TG_UPD, KLOGAD, SPMU,TAHUN_REFGAJI,JENIS_SK,JENRUB) 
-                VALUES ('".$NRK."',TO_DATE('".$TMT."', 'DD-MM-YYYY'),'".$KOPANG."',".$TTMASKER.",".$BBMASKER.",'".$KOLOK."',".$GAPOK.",".$PEJTT.",UPPER('".$NOSK."'),TO_DATE('".$TGSK."', 'DD-MM-YYYY'),'".$USER_ID."','".$term."', SYSDATE,'".$KLOGAD."','".$SPMU."','".$TAHUN_REFGAJI."','".$JENSK."',".$JENRUB.")"; 
+            $sql = "INSERT INTO PERS_PANGKAT_HIST(NRK,TMT,KOPANG,TTMASKER,BBMASKER,KOLOK,GAPOK,PEJTT,NOSK,TGSK,USER_ID,TERM,TG_UPD, KLOGAD, SPMU,TAHUN_REFGAJI,JENIS_SK,JENRUB,KETERANGAN) 
+                VALUES ('".$NRK."',TO_DATE('".$TMT."', 'DD-MM-YYYY'),'".$KOPANG."',".$TTMASKER.",".$BBMASKER.",'".$KOLOK."',".$GAPOK.",".$PEJTT.",UPPER('".$NOSK."'),TO_DATE('".$TGSK."', 'DD-MM-YYYY'),'".$USER_ID."','".$term."', SYSDATE,'".$KLOGAD."','".$SPMU."','".$TAHUN_REFGAJI."','".$JENSK."',".$JENRUB.",'".$KET."')"; 
 
             $insert = $this->db->query($sql);
 
@@ -2091,6 +2092,8 @@
         $TGSK = $this->input->post('tgsk');
         $USER_ID = $data['user_id'];
 
+        $KET = $this->input->post('keterangan');
+
         $TTMASYAD = $this->input->post('ttmasyad');
         $BBMASYAD = $this->input->post('bbmasyad');
         $JENRUB = $this->input->post('jenrub');
@@ -2112,8 +2115,9 @@
     
             $sql = "UPDATE PERS_PANGKAT_HIST SET TTMASKER=".$TTMASKER.",BBMASKER = ".$BBMASKER.",KOLOK = '".$KOLOK."', GAPOK = ".$GAPOK.",PEJTT = ".$PEJTT.",
                     NOSK = UPPER('".$NOSK."'),TGSK = TO_DATE('".$TGSK."', 'DD-MM-YY'),user_id='".$USER_ID."',term='".$term."', TG_UPD = SYSDATE, KLOGAD = '".$KLOGAD."', SPMU = '".$SPMU."',TAHUN_REFGAJI = '".$TAHUN_REFGAJI."',JENRUB = ".$JENRUB."
+                    ,KETERANGAN= '".$KET."'
                     WHERE NRK = '".$NRK."' AND TMT =TO_DATE('".$TMT."', 'DD-MM-YY') AND KOPANG='".$KOPANG."'"; 
-                   
+            // echo $sql;exit();
             $id = $this->db->query($sql);
 
             if ($id){
@@ -2247,7 +2251,7 @@
 
     public function getPangkatById($id1,$id2,$id3)
     {
-        $sql = "SELECT NRK, TMT, KOPANG, TTMASKER, BBMASKER, KOLOK, GAPOK, PEJTT, NOSK, TGSK, KLOGAD, SPMU, TAHUN_REFGAJI,JENRUB FROM PERS_PANGKAT_HIST
+        $sql = "SELECT NRK, TMT, KOPANG, TTMASKER, BBMASKER, KOLOK, GAPOK, PEJTT, NOSK, TGSK, KLOGAD, SPMU, TAHUN_REFGAJI,JENRUB,KETERANGAN FROM PERS_PANGKAT_HIST
                 WHERE NRK = '".$id1."' AND TMT= TO_DATE('".$id2."','DD-MM-YYYY') AND KOPANG='".$id3."'";
         //var_dump($sql);
         $id = $this->db->query($sql)->row();
@@ -2308,6 +2312,7 @@
         $TTMASYAD = $this->input->post('ttmasyad');
         $BBMASYAD = $this->input->post('bbmasyad');
         $USER_ID = $data['user_id'];
+        $KET = $this->input->post('keterangan');
         
         $term = $this->input->ip_address();
         if($term == '0.0.0.0') {
@@ -2322,8 +2327,8 @@
         if($cek==0)
         {
 
-            $sql = "INSERT INTO PERS_RB_GAPOK_HIST(NRK,TMT,GAPOK,JENRUB,KOPANG,TTMASKER,BBMASKER,KOLOK,NOSK,TGSK,TTMASYAD,BBMASYAD,USER_ID,TERM,TG_UPD, KLOGAD, SPMU,TAHUN_REFGAJI,JENIS_SK) 
-            VALUES ('".$NRK."',TO_DATE('".$TMT."', 'DD-MM-YYYY'),".$GAPOK.",".$JENRUB.",'".$KOPANG."',".$TTMASKER.",".$BBMASKER.",'".$KOLOK."',UPPER('".$NOSK."'),TO_DATE('".$TGSK."', 'DD-MM-YYYY'),".$TTMASYAD.",".$BBMASYAD.",'".$USER_ID."','".$term."', SYSDATE,'".$KLOGAD."','".$SPMU."','".$TAHUN_REFGAJI."','".$JENSK."')";
+            $sql = "INSERT INTO PERS_RB_GAPOK_HIST(NRK,TMT,GAPOK,JENRUB,KOPANG,TTMASKER,BBMASKER,KOLOK,NOSK,TGSK,TTMASYAD,BBMASYAD,USER_ID,TERM,TG_UPD, KLOGAD, SPMU,TAHUN_REFGAJI,JENIS_SK,KETERANGAN) 
+            VALUES ('".$NRK."',TO_DATE('".$TMT."', 'DD-MM-YYYY'),".$GAPOK.",".$JENRUB.",'".$KOPANG."',".$TTMASKER.",".$BBMASKER.",'".$KOLOK."',UPPER('".$NOSK."'),TO_DATE('".$TGSK."', 'DD-MM-YYYY'),".$TTMASYAD.",".$BBMASYAD.",'".$USER_ID."','".$term."', SYSDATE,'".$KLOGAD."','".$SPMU."','".$TAHUN_REFGAJI."','".$JENSK."','".$KET."')";
             
             $id = $this->db->query($sql);
 
@@ -2378,6 +2383,7 @@
         $TTMASYAD = $this->input->post('ttmasyad');
         $BBMASYAD = $this->input->post('bbmasyad');
         $USER_ID = $data['user_id'];
+        $KET = $this->input->post('keterangan');
        
         $term = $this->input->ip_address();
         if($term == '0.0.0.0') {
@@ -2392,7 +2398,7 @@
         if($cek==1)
         {
     
-            $sql = "UPDATE PERS_RB_GAPOK_HIST SET GAPOK = ".$GAPOK.",JENRUB = ".$JENRUB.", KOPANG = '".$KOPANG."', TTMASKER = ".$TTMASKER.", BBMASKER = ".$BBMASKER.", KOLOK = '".$KOLOK."', NOSK = UPPER('".$NOSK."'),TGSK = TO_DATE('".$TGSK."', 'DD-MM-YYYY'), TTMASYAD = ".$TTMASYAD.", BBMASYAD = ".$BBMASYAD.", USER_ID = '".$USER_ID."', TERM = '".$term."', TG_UPD = SYSDATE, KLOGAD = '".$KLOGAD."', SPMU = '".$SPMU."', TAHUN_REFGAJI='".$TAHUN_REFGAJI."', JENIS_SK='".$JENSK."'
+            $sql = "UPDATE PERS_RB_GAPOK_HIST SET GAPOK = ".$GAPOK.",JENRUB = ".$JENRUB.", KOPANG = '".$KOPANG."', TTMASKER = ".$TTMASKER.", BBMASKER = ".$BBMASKER.", KOLOK = '".$KOLOK."', NOSK = UPPER('".$NOSK."'),TGSK = TO_DATE('".$TGSK."', 'DD-MM-YYYY'), TTMASYAD = ".$TTMASYAD.", BBMASYAD = ".$BBMASYAD.", USER_ID = '".$USER_ID."', TERM = '".$term."', TG_UPD = SYSDATE, KLOGAD = '".$KLOGAD."', SPMU = '".$SPMU."', TAHUN_REFGAJI='".$TAHUN_REFGAJI."', JENIS_SK='".$JENSK."',KETERANGAN= '".$KET."'
                     WHERE NRK = '".$NRK."' AND TMT = TO_DATE('".$TMT."', 'DD-MM-YY') AND GAPOK=".$GAPOK_PK."";
             
             $id = $this->db->query($sql);
@@ -3591,7 +3597,7 @@
         $NPK = $this->input->post('nilai_perilaku');
         
         $USER_ID = $data['user_id'];
-        
+        $KET = $this->input->post('keterangan');
 
         $sqlcek = "SELECT * FROM PERS_SKP WHERE NRK='$NRK' and TAHUN ='$TAHUN'";
         $querycek = $this->db->query($sqlcek);
@@ -3603,9 +3609,9 @@
         }
         else
         {
-            $sql = "INSERT INTO PERS_SKP(NRK, TAHUN, PELAYANAN, INTEGRITAS, KOMITMEN, DISIPLIN, KERJASAMA, KEPEMIMPINAN, JUMLAH, RATA2, NILAI_SKP, NILAI_PERILAKU, NILAI_PRESTASI, STATUS_VALIDASI, USERID_INPUT, TGUPD_INPUT, NRK_PEJABAT_PENILAI,NRK_ATASAN_PEJABAT_PENILAI,INPUT_SKP) 
+            $sql = "INSERT INTO PERS_SKP(NRK, TAHUN, PELAYANAN, INTEGRITAS, KOMITMEN, DISIPLIN, KERJASAMA, KEPEMIMPINAN, JUMLAH, RATA2, NILAI_SKP, NILAI_PERILAKU, NILAI_PRESTASI, STATUS_VALIDASI, USERID_INPUT, TGUPD_INPUT, NRK_PEJABAT_PENILAI,NRK_ATASAN_PEJABAT_PENILAI,INPUT_SKP,KETERANGAN) 
                 VALUES ('".$NRK."','".$TAHUN."',".$PELAYANAN.",".$INTEGRITAS.",".$KOMITMEN.",".$DISIPLIN.",".$KERJASAMA.",".$KEPEMIMPINAN.",".$JUMLAH.",".$RATA.",".$NILAI_SKP.",".$NPK.",".$PRESTASI.",'0',
-                '".$USER_ID."', SYSDATE,'$NRKPPtemp','$NRKAPPtemp','$INPUT_SKP')"; 
+                '".$USER_ID."', SYSDATE,'$NRKPPtemp','$NRKAPPtemp','$INPUT_SKP','".$KET."')"; 
             //die($sql);
             $query = $this->db->query($sql);
 
@@ -3655,7 +3661,7 @@
         $NPK = $this->input->post('nilai_perilaku');
         
         $USER_ID = $data['user_id'];
-        
+        $KET = $this->input->post('keterangan');
 
         if($NRKPPtemp == "")
         {
@@ -3680,14 +3686,14 @@
         if($this->input->post('validator')!=null)
         {
             $sql = "UPDATE PERS_SKP SET  PELAYANAN = '$PELAYANAN', INTEGRITAS = '$INTEGRITAS', KOMITMEN = '$KOMITMEN', DISIPLIN = '$DISIPLIN', 
-                KERJASAMA = '$KERJASAMA', KEPEMIMPINAN = '$KEPEMIMPINAN', JUMLAH = '$JUMLAH', RATA2 = '".$RATA."', NILAI_SKP = '$NILAI_SKP', NILAI_PERILAKU = '$NPK', NILAI_PRESTASI='$PRESTASI', STATUS_VALIDASI = '$stat_validasi',USERID_VALIDASI = '".$validator."',TGUPD_VALIDASI=SYSDATE,NRK_PEJABAT_PENILAI='$NRKPPFIX',NRK_ATASAN_PEJABAT_PENILAI = '$NRKAPPFIX',INPUT_SKP = '$INPUT_SKP'
+                KERJASAMA = '$KERJASAMA', KEPEMIMPINAN = '$KEPEMIMPINAN', JUMLAH = '$JUMLAH', RATA2 = '".$RATA."', NILAI_SKP = '$NILAI_SKP', NILAI_PERILAKU = '$NPK', NILAI_PRESTASI='$PRESTASI', STATUS_VALIDASI = '$stat_validasi',USERID_VALIDASI = '".$validator."',TGUPD_VALIDASI=SYSDATE,NRK_PEJABAT_PENILAI='$NRKPPFIX',NRK_ATASAN_PEJABAT_PENILAI = '$NRKAPPFIX',INPUT_SKP = '$INPUT_SKP',KETERANGAN= '".$KET."'
                 WHERE NRK = '".$NRK."' AND TAHUN = '".$TAHUN."'
                 ";     
         }
         else
         {
             $sql = "UPDATE PERS_SKP SET  PELAYANAN = '$PELAYANAN', INTEGRITAS = '$INTEGRITAS', KOMITMEN = '$KOMITMEN', DISIPLIN = '$DISIPLIN', 
-                KERJASAMA = '$KERJASAMA', KEPEMIMPINAN = '$KEPEMIMPINAN', JUMLAH = '$JUMLAH', RATA2 = '".$RATA."', NILAI_SKP = '$NILAI_SKP', NILAI_PERILAKU = '$NPK', NILAI_PRESTASI='$PRESTASI', STATUS_VALIDASI = '0',USERID_INPUT = '".$USER_ID."',TGUPD_INPUT=SYSDATE,NRK_PEJABAT_PENILAI='$NRKPPFIX',NRK_ATASAN_PEJABAT_PENILAI = '$NRKAPPFIX',INPUT_SKP = '$INPUT_SKP'
+                KERJASAMA = '$KERJASAMA', KEPEMIMPINAN = '$KEPEMIMPINAN', JUMLAH = '$JUMLAH', RATA2 = '".$RATA."', NILAI_SKP = '$NILAI_SKP', NILAI_PERILAKU = '$NPK', NILAI_PRESTASI='$PRESTASI', STATUS_VALIDASI = '0',USERID_INPUT = '".$USER_ID."',TGUPD_INPUT=SYSDATE,NRK_PEJABAT_PENILAI='$NRKPPFIX',NRK_ATASAN_PEJABAT_PENILAI = '$NRKAPPFIX',INPUT_SKP = '$INPUT_SKP',KETERANGAN= '".$KET."'
                 WHERE NRK = '".$NRK."' AND TAHUN = '".$TAHUN."'
                 ";     
         }
@@ -3892,7 +3898,8 @@
             $PEJTT = $this->input->post('pejtt');
 
             $USER_ID = $data['user_id'];
-            
+            $KET = $this->input->post('keterangan');
+
             $term=$this->input->ip_address();
             if($term == '0.0.0.0') {
             $ip = explode(',', $_SERVER['REMOTE_ADDR']);
@@ -3903,9 +3910,9 @@
 
             if($cek == 0)
             {
-                $sql = "INSERT INTO PERS_CUTI_HIST(NRK,TMT,JENCUTI,TGAKHIR,NOSK,TGSK,PEJTT,USER_ID,TERM,TG_UPD,JENIS_SK) 
+                $sql = "INSERT INTO PERS_CUTI_HIST(NRK,TMT,JENCUTI,TGAKHIR,NOSK,TGSK,PEJTT,USER_ID,TERM,TG_UPD,JENIS_SK,KETERANGAN) 
                 VALUES ('".$NRK."',TO_DATE('".$TMT."', 'DD-MM-YYYY'),'".$JENCUTI."',TO_DATE('".$TGAKHIR."', 'DD-MM-YYYY'),UPPER('".$NOSK."'),TO_DATE('".$TGSK."', 'DD-MM-YYYY'),'".$PEJTT."',
-                    '".$USER_ID."','".$term."',SYSDATE,'".$JENSK."')"; 
+                    '".$USER_ID."','".$term."',SYSDATE,'".$JENSK."','".$KET."')"; 
         
                 $id = $this->db->query($sql);
 
@@ -3963,7 +3970,8 @@
             $PEJTT = $this->input->post('pejtt');
 
             $USER_ID = $data['user_id'];
-          
+            $KET = $this->input->post('keterangan');
+
             $term=$this->input->ip_address();
             if($term == '0.0.0.0') {
             $ip = explode(',', $_SERVER['REMOTE_ADDR']);
@@ -3975,7 +3983,7 @@
             if($cek == 1)
             {
                 $sql = "UPDATE PERS_CUTI_HIST SET JENCUTI = '".$JENCUTI."', TGAKHIR = TO_DATE('".$TGAKHIR."', 'DD-MM-YYYY'), NOSK = UPPER('".$NOSK."'), TGSK = TO_DATE('".$TGSK."', 'DD-MM-YYYY'), PEJTT = '".$PEJTT."', 
-                        USER_ID = '".$USER_ID."', TERM = '".$term."', TG_UPD = SYSDATE, JENIS_SK='".$JENSK."'
+                        USER_ID = '".$USER_ID."', TERM = '".$term."', TG_UPD = SYSDATE, JENIS_SK='".$JENSK."',KETERANGAN= '".$KET."'
                         WHERE NRK = '".$NRK."' AND TMT = TO_DATE('".$TMT."', 'DD-MM-YYYY')"; 
             
                 $id = $this->db->query($sql);
@@ -4466,6 +4474,7 @@
             //$STAT = $this->input->post('stat_app');
 
             $USER_ID=$data['user_id'];
+            $KET = $this->input->post('keterangan');
            
             $term=$this->input->ip_address();
             if($term == '0.0.0.0') {
@@ -4498,11 +4507,11 @@
 
                 $sql = "INSERT INTO PERS_ALAMAT_HIST(
                     NRK,TGMULAI,ALAMAT_KTP,ALAMAT,RT,RW,KOWIL,KOCAM,KOKEL,PROP,STAT_APP,USER_ID,TERM,TG_UPD,
-                    RT_KTP,RW_KTP,KOWIL_KTP,KOCAM_KTP,KOKEL_KTP,PROP_KTP
+                    RT_KTP,RW_KTP,KOWIL_KTP,KOCAM_KTP,KOKEL_KTP,PROP_KTP,KETERANGAN
                     ) VALUES (
                     '".$NRK."',TO_DATE('".$TGMULAI."', 'DD-MM-YYYY'),'".$ALAMAT_KTP."','".$ALAMAT."','".$RT."','".$RW."','".$KOWIL."','".$KOCAM."','".$KOKEL."','".$PROP."','1',
                     '".$USER_ID."','".$term."',SYSDATE,
-                    '".$RT_KTP."','".$RW_KTP."','".$KOWIL_KTP."','".$KOCAM_KTP."','".$KOKEL_KTP."','".$PROP_KTP."'
+                    '".$RT_KTP."','".$RW_KTP."','".$KOWIL_KTP."','".$KOCAM_KTP."','".$KOKEL_KTP."','".$PROP_KTP."','".$KET."'
                     )";
                
                 $id = $this->db->query($sql);
@@ -4538,6 +4547,7 @@
             $PROP_KTP = $this->input->post('prop_ktp');
             //$STAT = $this->input->post('stat_app');
             $USER_ID=$data['user_id'];
+            $KET = $this->input->post('keterangan');
            
             $term=$this->input->ip_address();
             if($term == '0.0.0.0') {
@@ -4570,7 +4580,8 @@
                         USER_ID = '".$USER_ID."', 
                         TERM = '".$term."', 
                         TG_UPD = SYSDATE, 
-                        STAT_APP='1' 
+                        STAT_APP='1',
+                        KETERANGAN= '".$KET."'
                         WHERE NRK = '".$NRK."' AND TGMULAI = TO_DATE('".$TGMULAI."', 'DD-MM-YYYY')";
 
                         /*if(//tidak ada perubahan
@@ -4759,6 +4770,7 @@
             $JNASAL = $this->input->post('jnasal');            
 
             $USER_ID=$data['user_id'];
+            $KET = $this->input->post('keterangan');
             
             $term=$this->input->ip_address();
             if($term == '0.0.0.0') {
@@ -4770,9 +4782,9 @@
 
             if($cek == 0)
             {
-                $sql = "INSERT INTO PERS_PENGHARGAAN(NRK,KDHARGA,TGSK,NOSK,ASAL_HRG,JNASAL,USER_ID,TERM,TG_UPD) 
+                $sql = "INSERT INTO PERS_PENGHARGAAN(NRK,KDHARGA,TGSK,NOSK,ASAL_HRG,JNASAL,USER_ID,TERM,TG_UPD,KETERANGAN) 
                 VALUES ('".$NRK."','".$KDHARGA."',TO_DATE('".$TGSK."', 'DD-MM-YYYY'),UPPER('".$NOSK."'),UPPER('".$ASAL_HRG."'),'".$JNASAL."',
-                    '".$USER_ID."','".$term."',SYSDATE)"; 
+                    '".$USER_ID."','".$term."',SYSDATE,'".$KET."')"; 
             
                  $id = $this->db->query($sql);
             }
@@ -4796,6 +4808,7 @@
             $JNASAL = $this->input->post('jnasal');            
 
             $USER_ID=$data['user_id'];
+            $KET = $this->input->post('keterangan');
             
             $term=$this->input->ip_address();
             if($term == '0.0.0.0') {
@@ -4809,7 +4822,7 @@
             {
                 
                 $sql = "UPDATE PERS_PENGHARGAAN SET TGSK = TO_DATE('".$TGSK."', 'DD-MM-YYYY'), NOSK = UPPER('".$NOSK."'), ASAL_HRG = UPPER('".$ASAL_HRG."'), JNASAL = '".$JNASAL."', 
-                        USER_ID = '".$USER_ID."', TERM = '".$term."', TG_UPD = SYSDATE
+                        USER_ID = '".$USER_ID."', TERM = '".$term."', TG_UPD = SYSDATE,KETERANGAN= '".$KET."'
                         WHERE NRK = '".$NRK."' AND KDHARGA = '".$KDHARGA."'"; 
             
                 $id = $this->db->query($sql);
@@ -5515,6 +5528,7 @@ public function save_testtp($data)
         $STAT = $this->input->post('stat_app');        
 
         $USER_ID=$data['user_id'];
+        $KET = $this->input->post('keterangan');
       
         $term=$this->input->ip_address();
         if($term == '0.0.0.0') {
@@ -5534,7 +5548,7 @@ public function save_testtp($data)
                 NRK,NIK,HUBKEL,NAMA,JENKEL,TEMHIR,TALHIR,TGNIKAH,TEMNIKAH,
                 STATTUN,KDKERJA,MATI,UANGDUKA,USER_ID,TERM,TG_UPD,
                 NOAKTENIKAH,NOAKTECERAI,TGAKTECERAI,NOAKTIFSEK,TGAKTIFSEK,
-                NOSURATMATI,TGSURATMATI,STAT_APP,INPUT_TUN,NO_SURAT_SKL,TG_SURAT_TUN,NOSURATCERAI,TGSURATCERAI
+                NOSURATMATI,TGSURATMATI,STAT_APP,INPUT_TUN,NO_SURAT_SKL,TG_SURAT_TUN,NOSURATCERAI,TGSURATCERAI,KETERANGAN
                 )
                 VALUES (
                 '".$NRK."','".$NIK."','".$HUBKEL."',UPPER('".$NAMA."'),'".$JENKEL."',UPPER('".$TEMHIR."'),TO_DATE('".$TALHIR."', 'DD-MM-YYYY'),TO_DATE('".$TGNIKAH."', 'DD-MM-YYYY'),
@@ -5543,7 +5557,7 @@ public function save_testtp($data)
                 '".$USER_ID."','".$term."',SYSDATE,
                 '".$NOAKTENIKAH."','".$NOAKTECERAI."',TO_DATE('".$TGAKTECERAI."', 'DD-MM-YYYY'),
                 '".$NOAKTIFSEK."',TO_DATE('".$TGAKTIFSEK."', 'DD-MM-YYYY'),
-                '".$NOSURATMATI."',TO_DATE('".$TGSURATMATI."', 'DD-MM-YYYY'),'".$STAT."',0,'','','$NOSURATCERAI',TO_DATE('$TGSURATCERAI','DD-MM-YYYY'))";
+                '".$NOSURATMATI."',TO_DATE('".$TGSURATMATI."', 'DD-MM-YYYY'),'".$STAT."',0,'','','$NOSURATCERAI',TO_DATE('$TGSURATCERAI','DD-MM-YYYY'),'".$KET."')";
             // echo $sql;
             $id = $this->db->query($sql);
             if($STAT==1)
@@ -5674,6 +5688,8 @@ public function save_testtp($data)
         }
         $STAT = $this->input->post('stat_app');
         $USER_ID=$data['user_id'];
+        $KET = $this->input->post('keterangan');
+
         $term=$this->input->ip_address();
         if($term == '0.0.0.0') {
             $ip = explode(',', $_SERVER['REMOTE_ADDR']);
@@ -5786,7 +5802,7 @@ public function save_testtp($data)
                 }   
                 $sql = "UPDATE PERS_KELUARGA SET NAMA = UPPER('".$NAMA."'), NIK = '".$NIK."',JENKEL = '".$JENKEL."', TEMHIR = UPPER('".$TEMHIR."'), TALHIR = TO_DATE('".$TALHIR."', 'DD-MM-YYYY'), TGNIKAH = TO_DATE('".$TGNIKAH."', 'DD-MM-YYYY'),TEMNIKAH = UPPER('".$TEMNIKAH."'), STATTUN = '".$STATTUN."', MATI = TO_DATE('".$MATI."', 'DD-MM-YYYY'), UANGDUKA = '".$UANGDUKA."', USER_ID = '".$USER_ID."', TERM = '".$term."', TG_UPD = SYSDATE,NOAKTENIKAH = '".$NOAKTENIKAH."',NOAKTECERAI = '".$NOAKTECERAI."',TGAKTECERAI = TO_DATE('".$TGAKTECERAI."', 'DD-MM-YYYY'),NOAKTIFSEK = '".$NOAKTIFSEK."',
                     TGAKTIFSEK = TO_DATE('".$TGAKTIFSEK."', 'DD-MM-YYYY'),NOSURATMATI = '".$NOSURATMATI."',TGSURATMATI = TO_DATE('".$TGSURATMATI."', 'DD-MM-YYYY'),STAT_APP = '".$STAT."',
-                    KDKERJA='$KDKERJA',TGSURATCERAI = TO_DATE('$TGSURATCERAI','DD-MM-YYYY'),NOSURATCERAI = '$NOSURATCERAI'
+                    KDKERJA='$KDKERJA',TGSURATCERAI = TO_DATE('$TGSURATCERAI','DD-MM-YYYY'),NOSURATCERAI = '$NOSURATCERAI',KETERANGAN= '".$KET."'
                     WHERE NRK = '".$NRK."' AND HUBKEL = '".$HUBKEL."'"; 
                     // echo $sql;exit;
                
@@ -5796,7 +5812,7 @@ public function save_testtp($data)
                 
                $sql = "UPDATE PERS_KELUARGA SET
                     NAMA = UPPER('".$NAMA."'), NIK = '".$NIK."',JENKEL = '".$JENKEL."', TEMHIR = UPPER('".$TEMHIR."'), TALHIR = TO_DATE('".$TALHIR."', 'DD-MM-YYYY'), TGNIKAH = TO_DATE('".$TGNIKAH."', 'DD-MM-YYYY'),TEMNIKAH = UPPER('".$TEMNIKAH."'), STATTUN = '".$STATTUN."', MATI = TO_DATE('".$MATI."', 'DD-MM-YYYY'), UANGDUKA = '".$UANGDUKA."', USER_ID = '".$USER_ID."', TERM = '".$term."', TG_UPD = SYSDATE,NOAKTENIKAH = '".$NOAKTENIKAH."',NOAKTECERAI = '".$NOAKTECERAI."',TGAKTECERAI = TO_DATE('".$TGAKTECERAI."', 'DD-MM-YYYY'),NOSURATCERAI = '".$NOSURATCERAI."',TGSURATCERAI = TO_DATE('".$TGSURATCERAI."', 'DD-MM-YYYY'),NOAKTIFSEK = '".$NOAKTIFSEK."',TGAKTIFSEK = TO_DATE('".$TGAKTIFSEK."', 'DD-MM-YYYY'),NOSURATMATI = '".$NOSURATMATI."',TGSURATMATI = TO_DATE('".$TGSURATMATI."', 'DD-MM-YYYY'),STAT_APP = '".$STAT."', INPUT_TUN =".$INPUT_TUN.", NO_SURAT_SKL = '".$NO_SURAT_SKL."', TG_SURAT_TUN = TO_DATE('".$TG_SURAT_TUN."','DD-MM-YYYY'), 
-                    KDKERJA='$KDKERJA'
+                    KDKERJA='$KDKERJA',KETERANGAN= '".$KET."'
                     WHERE NRK = '".$NRK."' AND HUBKEL = '".$HUBKEL."'";
                 // echo $sql;exit;
                    

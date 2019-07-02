@@ -122,7 +122,14 @@
                       <div class="input-group col-sm-7">
                          <input type="text" id="jnasal" name="jnasal" maxlength="1" onkeypress="return numbersonly1(this, event)" placeholder="Jenis" value="<?php echo isset($infoPenghargaan->JNASAL) ? $infoPenghargaan->JNASAL : ""; ?>" class="form-control">
                       </div>
-                    </div>              
+                    </div>   
+
+                    <div class="form-group pickerpicker">
+                        <label class="col-sm-4 control-label">Keterangan</label>
+                        <div class="input-group col-sm-7">
+                            <textarea class="form-control" name="keterangan" id="keterangan" maxlength="100" placeholder="Keterangan"><?php echo isset($infoPenghargaan->KETERANGAN) ? $infoPenghargaan->KETERANGAN:""; ?></textarea>
+                        </div>         
+                    </div>           
                     
                 </div>
                 <!-- END SIDE 1 -->            

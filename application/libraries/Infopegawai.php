@@ -1953,7 +1953,7 @@ class Infopegawai {
         $accDel=$access['mnac']->act_delete;
         // $accDelFlag=$access['mnac']->act_delete_flag;
         $sql = "SELECT KO.NRK,TO_CHAR(KO.TMT, 'DD-MM-YYYY') TMT, KO.NOSK, TO_CHAR(KO.TGSK, 'DD-MM-YYYY') TGSK, KO.KOPANG,
-                KO.TTMASKER, KO.BBMASKER, TB.GOL, TB.NAPANG, KO.KOLOK, LO.NALOKL, KO.GAPOK, TO_CHAR(KO.TG_UPD, 'DD-MM-YYYY HH24:MI:SS') TG_UPD, KO.USER_ID,KO.KLOGAD,LG.NALOKL AS NAKLOGAD,KO.SPMU, SP.NAMA AS NAMA_SPM,f.KETERANGAN AS KET_PEJTT,g.KETERANGAN AS KET_JENRUB,KO.JENRUB
+                KO.TTMASKER, KO.BBMASKER, TB.GOL, TB.NAPANG, KO.KOLOK, LO.NALOKL, KO.GAPOK, TO_CHAR(KO.TG_UPD, 'DD-MM-YYYY HH24:MI:SS') TG_UPD, KO.USER_ID,KO.KLOGAD,LG.NALOKL AS NAKLOGAD,KO.SPMU, SP.NAMA AS NAMA_SPM,f.KETERANGAN AS KET_PEJTT,g.KETERANGAN AS KET_JENRUB,KO.JENRUB,KO.KETERANGAN as KET_HIST
                 FROM PERS_PANGKAT_HIST KO
                 LEFT JOIN PERS_PANGKAT_TBL TB ON KO.KOPANG = TB.KOPANG
                 LEFT JOIN PERS_LOKASI_TBL LO ON KO.KOLOK = LO.KOLOK
@@ -2001,7 +2001,9 @@ class Infopegawai {
                         <th>SKPD</th>
                          <th>No.SK <br/> <strong><small class='text-navy'>(Tgl. SK)</small></strong></th>
                         <th>Pejabat Penanda Tangan</th>
-                        <th>User ID <br/><strong><small class='text-navy'>(Tgl. Update)</small></strong></th><th>Aksi</th>
+                        <th>User ID <br/><strong><small class='text-navy'>(Tgl. Update)</small></strong></th>
+                        <th>Ket</th>
+                        <th>Aksi</th>
                     </tr>";
         $table .= "</thead>";
         $table .= "<tbody>";
@@ -2046,6 +2048,7 @@ class Infopegawai {
                 $table .= "<td>".$row->NOSK."<br><strong><small class='text-navy'>(".$row->TGSK.")</small></strong></td>";
                 $table.="<td>".$row->KET_PEJTT."</td>";
                 $table .= "<td>".$row->USER_ID."<br><strong><small class='text-navy'>(".$row->TG_UPD.")</small></strong></td>";
+                $table .= "<td>".$row->KET_HIST."</td>";
                 $table .= "<td >";
                 if($accUpd == 'Y'){
                     $table.="<button type='button' class='btn btn-outline btn-xs btn-success' title='Edit' onClick='getForm(\"pangkat\",\"update\",\"".$row->NRK."\",\"".date('d-m-Y', strtotime($row->TMT))."\",\"".$row->KOPANG."\");'><i class='fa fa-pencil-square'></i></button> &nbsp;";
@@ -2198,7 +2201,7 @@ class Infopegawai {
         $accDel=$access['mnac']->act_delete;
         // $accDelFlag=$access['mnac']->act_delete_flag;
 
-        $sql = "SELECT a.NRK, to_char(a.TMT, 'YYYY-MM-DD') TMT, a.NOSK, to_char(a.TGSK, 'DD-MM-YYYY') TGSK, a.KOPANG,a.TTMASKER, a.BBMASKER, b.NAPANG, b.GOL, a.GAPOK, a.KOLOK, c.NALOKL,d.KETERANGAN, to_char(a.TG_UPD, 'DD-MM-YYYY HH24:MI:SS') TG_UPD, a.USER_ID,a.KLOGAD,a.SPMU,e.NALOKL AS NAKLOGAD,f.NAMA AS NAMA_SPM,a.TAHUN_REFGAJI
+        $sql = "SELECT a.NRK, to_char(a.TMT, 'YYYY-MM-DD') TMT, a.NOSK, to_char(a.TGSK, 'DD-MM-YYYY') TGSK, a.KOPANG,a.TTMASKER, a.BBMASKER, b.NAPANG, b.GOL, a.GAPOK, a.KOLOK, c.NALOKL,d.KETERANGAN, to_char(a.TG_UPD, 'DD-MM-YYYY HH24:MI:SS') TG_UPD, a.USER_ID,a.KLOGAD,a.SPMU,e.NALOKL AS NAKLOGAD,f.NAMA AS NAMA_SPM,a.TAHUN_REFGAJI,a.KETERANGAN as KET_HIST
                 FROM PERS_RB_GAPOK_HIST a 
                 LEFT JOIN PERS_PANGKAT_TBL b ON a.KOPANG = b.KOPANG
                 LEFT JOIN PERS_LOKASI_TBL c ON a.KOLOK = c.KOLOK
@@ -2249,7 +2252,7 @@ class Infopegawai {
                         <th>No.SK <br/> <strong><small class='text-navy'>(Tgl. SK)</small></strong></th>
                         
                         <th>User ID <br/><strong><small class='text-navy'>(Tgl. Update)</small></strong></th>
-                        
+                        <th>Ket</th>
                         <th>Aksi</th>
                     </tr>";
         $table .= "</thead>";
@@ -2299,6 +2302,7 @@ class Infopegawai {
                 $table .= "<td>".$row->NOSK."<br><strong><small class='text-navy'>(".$row->TGSK.")</small></strong></td>";
                 
                 $table .= "<td>".$row->USER_ID."<br><strong><small class='text-navy'>(".$row->TG_UPD.")</small></strong></td>";
+                $table .= "<td>".$row->KET_HIST."</td>";
                
                 $table .= "<td>";
                 if($accUpd == 'Y'){
@@ -2453,7 +2457,7 @@ class Infopegawai {
 
         $sql = "SELECT a.NRK, to_char(a.TGSK, 'YYYY-MM-DD') TGSK, a.NOSK, b.KETERANGAN,
                   to_char(a.TGMULAI, 'DD-MM-YYYY') TGMULAI, to_char(a.TGAKHIR, 'DD-MM-YYYY') TGAKHIR,
-                  to_char(a.TG_UPD, 'DD-MM-YYYY HH24:MI:SS') TG_UPD,to_char(a.TMTMULAI_STOPTKD, 'DD-MM-YYYY') TMTMULAI_STOPTKD,to_char(a.TMTAKHIR_STOPTKD, 'DD-MM-YYYY') TMTAKHIR_STOPTKD,a.JMLBLN_STOPTKD, a.USER_ID,c.KETERANGAN AS KET_PEJTT,a.KET
+                  to_char(a.TG_UPD, 'DD-MM-YYYY HH24:MI:SS') TG_UPD,to_char(a.TMTMULAI_STOPTKD, 'DD-MM-YYYY') TMTMULAI_STOPTKD,to_char(a.TMTAKHIR_STOPTKD, 'DD-MM-YYYY') TMTAKHIR_STOPTKD,a.JMLBLN_STOPTKD, a.USER_ID,c.KETERANGAN AS KET_PEJTT
                 FROM PERS_DISIPLIN_HIST a 
                 LEFT JOIN PERS_JENHUKDIS_RPT b ON a.JENHUKDIS = b.JENHUKDIS
                 LEFT JOIN PERS_PEJTT_RPT c ON a.PEJTT = c.PEJTT
@@ -3019,7 +3023,7 @@ class Infopegawai {
         $accDel=$access['mnac']->act_delete;
         // $accDelFlag=$access['mnac']->act_delete_flag;
         $sql = "SELECT NRK,TAHUN,PELAYANAN,INTEGRITAS, KOMITMEN,DISIPLIN, KERJASAMA, KEPEMIMPINAN, JUMLAH,RATA2, NILAI_SKP,NILAI_PERILAKU,NILAI_PRESTASI,STATUS_VALIDASI, USERID_INPUT,       
-                TO_CHAR(TGUPD_INPUT,'DD-MM-YYYY HH24:MI:SS')TGUPD_INPUT,INPUT_SKP
+                TO_CHAR(TGUPD_INPUT,'DD-MM-YYYY HH24:MI:SS')TGUPD_INPUT,INPUT_SKP,KETERANGAN as KET_HIST
                 FROM pers_skp
                 WHERE NRK='$nrk' 
                 
@@ -3052,7 +3056,9 @@ class Infopegawai {
         $table .= "<table class='table table-striped table-bordered table-hover dataTables-example' width='99%'>";
         $table .= "<thead>";
         $table .= " <tr>                        
-                        <th>No</th><th>Tahun</th><th>Nilai SKP</th><th>Nilai Perilaku</th><th>NILAI PRESTASI</th><th>Status Validasi</th><th>Aksi</th>
+                        <th>No</th><th>Tahun</th><th>Nilai SKP</th><th>Nilai Perilaku</th><th>NILAI PRESTASI</th><th>Status Validasi</th>
+                        <th>Ket</th>
+                        <th>Aksi</th>
                     </tr>";
         $table .= "</thead>";
         $table .= "<tbody>";
@@ -3073,7 +3079,7 @@ class Infopegawai {
                 $table .= "<td align='right'>".$row->RATA2."</td>";
                 $table .= "<td align='right'>".$row->NILAI_PRESTASI."</td>";
                 $table .= "<td align='right'>".$hsl."</td>";
-                
+                $table .= "<td>".$row->KET_HIST."</td>";
                 $table .= "<td>";
 
                  $table.= "<button type='button' class='btn btn-outline btn-xs btn-primary' title='Detail' onClick='getFormView(\"skp\",\"view\",\"".$row->NRK."\",\"".$row->TAHUN."\");'><i class='fa fa-bars'></i></button> &nbsp;";
@@ -3223,7 +3229,7 @@ class Infopegawai {
         // $accDelFlag=$access['mnac']->act_delete_flag;
 
         $sql = "SELECT
-                  a.NRK, to_char(a.TMT, 'YYYY-MM-DD') TMT, a.NOSK, to_char(a.TGSK, 'YYYY-MM-DD') TGSK, b.KETERANGAN,A .JENCUTI,A .ID_HIST,A .STATUS_CUTI,to_char(a.TGAKHIR, 'DD-MM-YYYY') TGAKHIR, to_char(a.TG_UPD, 'DD-MM-YYYY HH24:MI:SS') TG_UPD,a.USER_ID,c.KETERANGAN AS KET_PEJTT
+                  a.NRK, to_char(a.TMT, 'YYYY-MM-DD') TMT, a.NOSK, to_char(a.TGSK, 'YYYY-MM-DD') TGSK, b.KETERANGAN,A .JENCUTI,A .ID_HIST,A .STATUS_CUTI,to_char(a.TGAKHIR, 'DD-MM-YYYY') TGAKHIR, to_char(a.TG_UPD, 'DD-MM-YYYY HH24:MI:SS') TG_UPD,a.USER_ID,c.KETERANGAN AS KET_PEJTT,a.KETERANGAN as KET_HIST
                 FROM PERS_CUTI_HIST a
                 LEFT JOIN PERS_JENCUTI_RPT b ON a.JENCUTI = b.JENCUTI
                 LEFT JOIN PERS_PEJTT_RPT c ON a.PEJTT = c.PEJTT
@@ -3316,6 +3322,7 @@ class Infopegawai {
                         <th>No.SK <br/> <strong><small class='text-navy'>(Tgl. SK)</small></strong></th>
                         <th>Pejabat Penanda Tangan</th>
                         <th>User ID <br/><strong><small class='text-navy'>(Tgl. Update)</small></strong></th>
+                        <th>Ket</th>
                         <th>Aksi</th>
                     </tr>";
         $table .= "</thead>";
@@ -3335,6 +3342,7 @@ class Infopegawai {
                 $table .= "<td>".$row->NOSK."<br><strong><small class='text-navy'>(".$tgsk.")</small></strong></td>";
                 $table.="<td>".$row->KET_PEJTT."</td>";
                 $table .= "<td>".$row->USER_ID."<br><strong><small class='text-navy'>(".$row->TG_UPD.")</small></strong></td>";
+                $table .= "<td>".$row->KET_HIST."</td>";
                 $table .= "<td>";
                 if(isset($row->ID_HIST)){
                     $table.= "<button type='button' class='btn btn-sm btn-info btn-outline' title='Detail Cuti ' onClick='detail_cuti(\"".$row->ID_HIST."\",\"".$row->JENCUTI."\");'>Detail</button> &nbsp;";
@@ -4003,7 +4011,7 @@ class Infopegawai {
                 a.ALAMAT, a.RT, a.RW,
                 a.ALAMAT_KTP, a.RT_KTP, a.RW_KTP, j.KET_STATUS,
                 b.NAMA AS NAWIL, c.NAMA AS NACAM, d.NAMA AS NAKEL, e.NAMA AS PROP,
-                f.NAMA AS NAWIL_KTP, g.NAMA AS NACAM_KTP, h.NAMA AS NAKEL_KTP, i.NAMA AS PROP_KTP,to_char(a.TG_UPD, 'DD-MM-YYYY HH24:MI:SS') TG_UPD, a.USER_ID
+                f.NAMA AS NAWIL_KTP, g.NAMA AS NACAM_KTP, h.NAMA AS NAKEL_KTP, i.NAMA AS PROP_KTP,to_char(a.TG_UPD, 'DD-MM-YYYY HH24:MI:SS') TG_UPD, a.USER_ID,a.KETERANGAN as KET_HIST
                 FROM PERS_ALAMAT_HIST a
                 LEFT JOIN LOKASI b ON a.KOWIL = b.KODE
                 LEFT JOIN LOKASI c ON a.KOCAM = c.KODE 
@@ -4069,7 +4077,11 @@ class Infopegawai {
         $table .= "<table class='table table-hover table-bordered table-striped dataTables-example' width='99%'>";
         $table .= "<thead>";
         $table .= " <tr>                        
-                        <th>No</th><th>Alamat Tempat Tinggal</th><th>Alamat KTP</th><th>Tgl. Mulai</th><th>Aksi</th>
+                        <th>No</th><th>Alamat Tempat Tinggal</th>
+                        <th>Alamat KTP</th>
+                        <th>Tgl. Mulai</th>
+                        <th>Ket</th>
+                        <th>Aksi</th>
                     </tr>";
         $table .= "</thead>";
         $table .= "<tbody>";
@@ -4139,7 +4151,7 @@ class Infopegawai {
                     $tgmulai = date('d M Y', strtotime($row->TGMULAI));
                 $table .= "<td>".$tgmulai."</td>";
                // $table .= "<td>".$row->KET_STATUS."</td>";    
-                
+                $table .= "<td>".$row->KET_HIST."</td>";
                 $table .= "<td >";
                 if($accUpd == 'Y')
                 {
@@ -4649,7 +4661,7 @@ class Infopegawai {
 
         $sql = "SELECT
                   a.NRK, a.KDHARGA, b.NAHARGA, a.TGSK, a.NOSK, a.ASAL_HRG,
-                  to_char(a.TG_UPD,'DD-MM-YYYY HH24:MI:SS')TG_UPD, a.USER_ID
+                  to_char(a.TG_UPD,'DD-MM-YYYY HH24:MI:SS')TG_UPD, a.USER_ID,a.KETERANGAN as KET_HIST
                 FROM PERS_PENGHARGAAN a
                 LEFT JOIN PERS_HARGAAN_TBL b ON a.KDHARGA = b.KDHARGA
                 WHERE a.NRK = '".$nrk."' 
@@ -4689,6 +4701,7 @@ class Infopegawai {
                         <th>Nama Penghargaan</th>
                         <th>Asal Penghargaan</th>
                         <th>User ID <br/><strong><small class='text-navy'>(Tgl. Update)</small></strong></th>
+                        <th>Ket</th>
                         <th>Aksi</th>
                     </tr>";
         $table .= "</thead>";
@@ -4704,6 +4717,7 @@ class Infopegawai {
                 $table .= "<td>".$row->ASAL_HRG."</td>";
                     $TG_UPD = date('d-m-Y', strtotime($row->TG_UPD));
                 $table .= "<td>".$row->USER_ID."<br><strong><small class='text-navy'>(".$row->TG_UPD.")</small></strong></td>";
+                $table .= "<td>".$row->KET_HIST."</td>";
                 $table .= "<td >";
                 if($accUpd == 'Y')
                 {
@@ -5139,7 +5153,7 @@ class Infopegawai {
                   a.NRK, a.HUBKEL, b.NAHUBKEL, a.NAMA, a.TEMHIR, to_char(a.TALHIR, 'YYYY-MM-DD') TALHIR,
                   a.TGNIKAH AS TGNIKAH1, to_char(a.TGNIKAH, 'YYYY-MM-DD') TGNIKAH, to_char(a.TGAKTECERAI, 'DD-MM-YYYY')TGAKTECERAI, to_char(a.TGSURATCERAI, 'DD-MM-YYYY')TGSURATCERAI, a.TEMNIKAH, c.KETERANGAN TUNJANGAN, d.KETERANGAN KERJAAN,
                   a.JENKEL, to_char(a.MATI, 'DD-MM-YYYY') MATI, a.UANGDUKA,e.KET_STATUS,
-                  to_char(a.TG_UPD, 'DD-MM-YYYY HH24:MI:SS') TG_UPD, a.USER_ID
+                  to_char(a.TG_UPD, 'DD-MM-YYYY HH24:MI:SS') TG_UPD, a.USER_ID,a.KETERANGAN as KET_HIST
                 FROM PERS_KELUARGA a
                 LEFT JOIN PERS_HUBKEL_TBL b ON a.HUBKEL = b.HUBKEL
                 LEFT JOIN PERS_STATTUN_RPT c ON a.STATTUN = c.STATTUN
@@ -5232,6 +5246,7 @@ class Infopegawai {
                         <th>Status Nikah</th>
                         <th>Meninggal Dunia</th>
                         <th>User ID <br/><strong><small class='text-navy'>(Tgl. Update)</small></strong></th>
+                        <th>Ket</th>
                         <th>Aksi</th>
                     </tr>";
         $table .= "</thead>";
@@ -5297,6 +5312,7 @@ class Infopegawai {
                 $table .= "<td>".$row->MATI."</td>";
                 //$table .= "<td>".$row->KET_STATUS."</td>";
                 $table .= "<td>".$row->USER_ID."<br><strong><small class='text-navy'>(".$row->TG_UPD.")</small></strong></td>";
+                $table .= "<td>".$row->KET_HIST."</td>";
                 $table .= "<td>";
 
                 if ($session_data['user_group']=='2' || $session_data['user_group']=='3' || $session_data['user_group']=='11'){
@@ -8233,7 +8249,7 @@ class Infopegawai {
     }
 
     public function getGapokHistBy($nrk,$tmt,$gapok){
-        $sql = "SELECT NRK, TMT, GAPOK, JENRUB, KOPANG, TTMASKER, BBMASKER, TTMASYAD, BBMASYAD, KOLOK, NOSK, TGSK,KLOGAD, SPMU,TAHUN_REFGAJI,JENIS_SK
+        $sql = "SELECT NRK, TMT, GAPOK, JENRUB, KOPANG, TTMASKER, BBMASKER, TTMASYAD, BBMASYAD, KOLOK, NOSK, TGSK,KLOGAD, SPMU,TAHUN_REFGAJI,JENIS_SK,KETERANGAN
                 FROM PERS_RB_GAPOK_HIST
                 WHERE NRK = '".$nrk."' AND GAPOK = '".$gapok."' AND TMT = TO_DATE('".$tmt."', 'YYYY-MM-DD')
                 ORDER BY TMT DESC
@@ -8304,7 +8320,8 @@ class Infopegawai {
                     F_GET_NAMA(A.NRK_PEJABAT_PENILAI)NAMA_PEJABAT_PENILAI,
                     A.NRK_ATASAN_PEJABAT_PENILAI,
                     F_GET_NAMA(A.NRK_ATASAN_PEJABAT_PENILAI)NAMA_ATASAN_PEJABAT_PENILAI,
-                    A.INPUT_SKP
+                    A.INPUT_SKP,
+                    A.KETERANGAN
                 FROM
                     PERS_SKP A
                 WHERE
@@ -8328,7 +8345,7 @@ class Infopegawai {
     }
 
     public function getCutiHistBy($nrk,$tmt){
-        $sql = "SELECT NRK, TMT, JENCUTI, TGAKHIR, NOSK, TGSK, PEJTT, JENIS_SK
+        $sql = "SELECT NRK, TMT, JENCUTI, TGAKHIR, NOSK, TGSK, PEJTT, JENIS_SK,KETERANGAN
                 FROM PERS_CUTI_HIST WHERE NRK = '".$nrk."' AND TMT = TO_DATE('".$tmt."', 'YY-MM-DD')
                 ";
 
@@ -8383,7 +8400,7 @@ class Infopegawai {
         $sql = "SELECT NRK, TGMULAI, 
                 ALAMAT, RT, RW, KOWIL, KOCAM, KOKEL, PROP,
                 ALAMAT_KTP, RT_KTP, RW_KTP, KOWIL_KTP, KOCAM_KTP, KOKEL_KTP, PROP_KTP,
-                STAT_APP
+                STAT_APP,KETERANGAN
                 FROM PERS_ALAMAT_HIST WHERE NRK = '".$nrk."' AND TGMULAI = TO_DATE('".$tgmulai."', 'YY-MM-DD')
                 ";
 
@@ -8393,7 +8410,7 @@ class Infopegawai {
     }
 
     public function getPenghargaanHistBy($nrk,$kdharga){
-        $sql = "SELECT NRK, KDHARGA, TGSK, NOSK, ASAL_HRG, JNASAL
+        $sql = "SELECT NRK, KDHARGA, TGSK, NOSK, ASAL_HRG, JNASAL,KETERANGAN
                 FROM PERS_PENGHARGAAN WHERE NRK = '".$nrk."' AND KDHARGA = '".$kdharga."'
                 ";
 
@@ -8443,7 +8460,7 @@ class Infopegawai {
            $sql ="SELECT A.NRK, A.HUBKEL, A.NAMA, A.TEMHIR, TO_CHAR(A.TALHIR,'DD-MM-YYYY')TALHIR, A.TEMNIKAH, A.TGNIKAH,
                 A.STATTUN, A.KDKERJA, A.JENKEL, A.MATI, A.UANGDUKA,
                 A.NIK, A.NOAKTENIKAH, A.NOAKTECERAI, A.TGAKTECERAI,A.NOSURATCERAI,A.TGSURATCERAI,
-                A.NOAKTIFSEK, A.TGAKTIFSEK, A.NOSURATMATI, A.TGSURATMATI,A.STAT_APP,A.NO_SURAT_SKL,TO_CHAR(TO_DATE(A.TG_SURAT_TUN,'DD-MM-YYYY'))TG_SURAT_TUN,(FLOOR((SYSDATE-A.TALHIR)/365))UMUR,B.NOPPEN
+                A.NOAKTIFSEK, A.TGAKTIFSEK, A.NOSURATMATI, A.TGSURATMATI,A.STAT_APP,A.NO_SURAT_SKL,TO_CHAR(TO_DATE(A.TG_SURAT_TUN,'DD-MM-YYYY'))TG_SURAT_TUN,(FLOOR((SYSDATE-A.TALHIR)/365))UMUR,B.NOPPEN,A.KETERANGAN
                 FROM PERS_KELUARGA A
 LEFT JOIN PERS_PEGAWAI2 B ON A.NRK = B.NRK
 WHERE A.NRK = '".$nrk."' AND A.HUBKEL = '".$hubkel."'";

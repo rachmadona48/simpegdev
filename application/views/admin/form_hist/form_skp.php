@@ -349,7 +349,16 @@
                     </div>
                 </div>       
             </div>
-            <?php } ?>			            			        	
+            <?php } ?>	
+
+            <div class="hr-line-dashed"></div>
+
+            <div class="form-group pickerpicker">
+                <label class="col-sm-3 control-label">Keterangan</label>
+                <div class="input-group col-sm-9">
+                    <textarea class="form-control" name="keterangan" id="keterangan" maxlength="100" placeholder="Keterangan"><?php echo isset($infoSKP->KETERANGAN) ? $infoSKP->KETERANGAN:""; ?></textarea>
+                </div>         
+            </div>  		            			        	
                	
     </div>
     <div class="modal-footer">
