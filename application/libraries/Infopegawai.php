@@ -1118,7 +1118,6 @@ class Infopegawai {
                     A .NASEK,
                     A .UNIVER,
                     B.NAUNIVER,
-                    
                     A .TERM,
                     
                     A .JENDIK,
@@ -1558,13 +1557,13 @@ class Infopegawai {
                 $table .= "<td>".$row->KET_HIST."</td>";
                 $table .= "<td>";
                 if($accUpd == 'Y'){
-                    $table.= "<button type='button' class='btn btn-outline btn-xs btn-success' title='Edit' onClick='getForm(\"pendidikan_nonformal_2\",\"update\",\"".$row->NRK."\",\"".$row->JENDIK."\",\"".$row->KODIK."\");'><i class='fa fa-pencil-square'></i></button> &nbsp;";
+                    $table.= "<button type='button' class='btn btn-outline btn-xs btn-success' title='Edit' onClick='getForm(\"pendidikan_nonformal_2\",\"update\",\"".$row->NRK."\",\"".$row->JENDIK."\",\"".$row->KODIK."\",\"".$row->TGIJAZAH."\");'><i class='fa fa-pencil-square'></i></button> &nbsp;";
                 }
                 // if($accDelFlag == 'Y'){                
                 //     $table.= "<button type='button' class='btn btn-outline btn-xs btn-danger' title='Hapus' onClick='confirmHapusDataFlag(\"pendidikan_nonformal\",\"".$row->NRK."\",\"".$row->JENDIK."\",\"".$row->KODIK."\");'><i class='fa fa-trash'></i></button> &nbsp;";
                 // }
                 if($accDel == 'Y'){                
-                    $table.= "<button type='button' class='btn btn-outline btn-xs btn-danger' title='Hapus ' onClick='confirmHapusData(\"pendidikan_nonformal\",\"".$row->NRK."\",\"".$row->JENDIK."\",\"".$row->KODIK."\");'><i class='fa fa-trash'></i></button>";
+                    $table.= "<button type='button' class='btn btn-outline btn-xs btn-danger' title='Hapus ' onClick='confirmHapusData(\"pendidikan_nonformal\",\"".$row->NRK."\",\"".$row->JENDIK."\",\"".$row->KODIK."\",\"".$row->TGIJAZAH."\");'><i class='fa fa-trash'></i></button>";
                 }
                 $table.="</td>";            
             $table .= "</tr>";
@@ -8220,19 +8219,27 @@ class Infopegawai {
         return $query;
     }
 
-    public function getPendidikanHistBy($nrk,$jendik,$kodik){
+    public function getPendidikanHistBy($nrk,$jendik,$kodik,$tgijazah=""){
         /*$sql = "SELECT NRK, JENDIK, KODIK, NASEK, UNIVER, KOTSEK, to_char(TGIJAZAH, 'DD-MM-YYYY') TGIJAZAH, NOIJAZAH,
                 to_char(TGACCKOP, 'DD-MM-YYYY') TGACCKOP, NOACCKOP, to_char(TGMULAI, 'DD-MM-YYYY') TGMULAI, 
                 to_char(TGAKHIR, 'DD-MM-YYYY') TGAKHIR, JUMJAM, SELENGGARA, ANGKATAN,TITELDEPAN,TITELBELAKANG,STAT_APP
                 FROM PERS_PENDIDIKAN WHERE NRK = '".$nrk."' AND JENDIK = '".$jendik."' AND KODIK = '".$kodik."'
                 ";*/
-
+        if($jendik==1){ #pendidikan formal
          $sql = "SELECT NRK, JENDIK, KODIK, NASEK, UNIVER, KOTSEK, to_char(TGIJAZAH, 'DD-MM-YYYY') TGIJAZAH, NOIJAZAH,
                 to_char(TGACCKOP, 'DD-MM-YYYY') TGACCKOP, NOACCKOP, to_char(TGMULAI, 'DD-MM-YYYY') TGMULAI, 
                 to_char(TGAKHIR, 'DD-MM-YYYY') TGAKHIR, JUMJAM, SELENGGARA, ANGKATAN,TITELDEPAN,TITELBELAKANG,STAT_APP,to_char(TG_STLU, 'DD-MM-YYYY') TG_STLU, NO_STLU,KD_STLU,KETERANGAN
-                FROM PERS_PENDIDIKAN WHERE NRK = '".$nrk."' AND JENDIK = '".$jendik."' AND KODIK = '".$kodik."'
+                FROM PERS_PENDIDIKAN WHERE NRK = '".$nrk."' AND JENDIK = '".$jendik."' AND KODIK = '".$kodik."' 
                 ";
-
+        }else{
+            $sql = "SELECT NRK, JENDIK, KODIK, NASEK, UNIVER, KOTSEK, to_char(TGIJAZAH, 'DD-MM-YYYY') TGIJAZAH, NOIJAZAH,
+                to_char(TGACCKOP, 'DD-MM-YYYY') TGACCKOP, NOACCKOP, to_char(TGMULAI, 'DD-MM-YYYY') TGMULAI, 
+                to_char(TGAKHIR, 'DD-MM-YYYY') TGAKHIR, JUMJAM, SELENGGARA, ANGKATAN,TITELDEPAN,TITELBELAKANG,STAT_APP,to_char(TG_STLU, 'DD-MM-YYYY') TG_STLU, NO_STLU,KD_STLU,KETERANGAN
+                FROM PERS_PENDIDIKAN WHERE NRK = '".$nrk."' AND JENDIK = '".$jendik."' AND KODIK = '".$kodik."' 
+                    AND TGIJAZAH = to_date('".$tgijazah."' , 'DD-MM-YYYY')
+                ";
+        }
+        // echo $sql;exit();
         $query = $this->ci->db->query($sql)->row();        
         
         return $query;

@@ -1130,6 +1130,7 @@ class Riwayat extends CI_Controller {
                 $nrk2 = $this->input->post('key1');//nrk
                 $jendik = $this->input->post('key2');//jendik
                 $kodik = $this->input->post('key3');//kodik
+                $tgijazah = $this->input->post('key4');//kodik
                 $jenpdk="";   
                 $univer = "";
                 $titeldepan="";
@@ -1168,14 +1169,15 @@ class Riwayat extends CI_Controller {
                 $nrk = $this->input->post('nrk');//nrk
                 $nrk2 = $this->input->post('key1');//nrk
                 $jendik = $this->input->post('key2');//jendik
-                $kodik = $this->input->post('key3');//kodik   
+                $kodik = $this->input->post('key3');//kodik 
+                $tgijazah = $this->input->post('key4');//kodik   
                 $univer = "";
                 $stat="";
 
                 $data['action'] = $action;
 
                 if($action != null && $action == 'update'){                    
-                    $data['infoPendidikan'] = $this->infopegawai->getPendidikanHistBy($nrk2,$jendik,$kodik);                    
+                    $data['infoPendidikan'] = $this->infopegawai->getPendidikanHistBy($nrk2,$jendik,$kodik,$tgijazah);                    
                     $univer = $data['infoPendidikan']->UNIVER;
                     $data['listKodik'] = $this->infopegawai->getMasterKodik($jendik,$kodik);
                     $stat=$data['infoPendidikan']->STAT_APP;
@@ -2195,9 +2197,9 @@ class Riwayat extends CI_Controller {
 
             case 'pendidikan_nonformal':
                 if ($action == 'hapus_flag') {
-                    $return = $this->home->delete_flag_pdNonFormal($key1,$key2,$key3);
+                    $return = $this->home->delete_flag_pdNonFormal($key1,$key2,$key3,$key4);
                 } else if ($action == 'hapus'){
-                    $return = $this->home->delete_pdNonFormal($key1,$key2,$key3);
+                    $return = $this->home->delete_pdNonFormal($key1,$key2,$key3,$key4);
                 }
                 
                 if($return){

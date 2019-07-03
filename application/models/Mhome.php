@@ -1041,10 +1041,11 @@
 
 /*START PENDIDIKAN FORMAL*/
 
-    function getDataPendidikan($id1,$id2,$id3)
+    function getDataPendidikan($id1,$id2,$id3,$id4)
     {
-        $sql = "SELECT * FROM PERS_PENDIDIKAN WHERE NRK ='".$id1."' AND JENDIK = ".$id2." AND KODIK = '".$id3."'";
-
+        $sql = "SELECT * FROM PERS_PENDIDIKAN WHERE NRK ='".$id1."' AND JENDIK = ".$id2." AND KODIK = '".$id3."' 
+            AND TGIJAZAH = to_date('".$id4."','DD-MM-YYYY')";
+        // echo $sql;exit();
         $query = $this->db->query($sql)->row();            
 
         return $query;
@@ -1118,7 +1119,7 @@
             $NOSTLU = '';
         }
 
-        $cek=$this->getDataPendidikan($NRK,$JENDIK,$KODIK);
+        $cek=$this->getDataPendidikan($NRK,$JENDIK,$KODIK,$TGIJAZAH);
         if($cek!=null)
         {
             $id=false;
@@ -1509,9 +1510,9 @@
             $term = $ip[0];
         }
         
-        $cek=$this->getDataPendidikan($NRK,$JENDIK,$KODIK);
+        $cek=$this->getDataPendidikan($NRK,$JENDIK,$KODIK,$TGIJAZAH);
 
-        
+        // echo $cek;exit();
         if($cek!=null)
         {
             $id=false;
@@ -1524,7 +1525,7 @@
                 TO_DATE('".$TGACCKOP."', 'DD-MM-YYYY'),UPPER('".$NOACCKOP."'),TO_DATE('".$TGMULAI."', 'DD-MM-YYYY'),TO_DATE('".$TGAKHIR."', 'DD-MM-YYYY'),".$JUMJAM.",UPPER('".$SELENGGARA."'),
                
                 '".$USER_ID."','".$term."', SYSDATE,UPPER('".$ANGKATAN."'),'".$STAT."','".$KET."')"; 
-            
+            // echo $sql;exit();
             $id = $this->db->query($sql);
         }
         
@@ -1668,17 +1669,17 @@
                             TGACCKOP = TO_DATE('".$TGACCKOP."', 'DD-MM-YYYY'),  NOACCKOP = UPPER('".$NOACCKOP."'), TGMULAI = TO_DATE('".$TGMULAI."', 'DD-MM-YYYY'), TGAKHIR = TO_DATE('".$TGAKHIR."', 'DD-MM-YYYY'), 
                             JUMJAM = '".$JUMJAM."', SELENGGARA = UPPER('".$SELENGGARA."'), 
                             USER_ID = '".$USER_ID."', TERM = '".$term."', TG_UPD=SYSDATE, ANGKATAN = UPPER('".$ANGKATAN."'), STAT_APP = '".$STAT."',KETERANGAN = '".$KET."'
-                            WHERE NRK = '".$NRK."' AND JENDIK = '".$JENDIK."' AND KODIK = '".$KODIK."'";         
+                            WHERE NRK = '".$NRK."' AND JENDIK = '".$JENDIK."' AND KODIK = '".$KODIK."' AND TGIJAZAH = TO_DATE('".$TGIJAZAH."', 'DD-MM-YYYY') ";   
         }
         else
         {
             $sql = "UPDATE PERS_PENDIDIKAN SET NASEK = '".$NASEK."', UNIVER = '".$UNIVER."', KOTSEK = UPPER('".$KOTSEK."'), TGIJAZAH = TO_DATE('".$TGIJAZAH."', 'DD-MM-YYYY'), NOIJAZAH = UPPER('".$NOIJAZAH."'), 
                             TGACCKOP = TO_DATE('".$TGACCKOP."', 'DD-MM-YYYY'),  NOACCKOP = UPPER('".$NOACCKOP."'), TGMULAI = TO_DATE('".$TGMULAI."', 'DD-MM-YYYY'), TGAKHIR = TO_DATE('".$TGAKHIR."', 'DD-MM-YYYY'), 
                             JUMJAM = '".$JUMJAM."', SELENGGARA = UPPER('".$SELENGGARA."'), USER_ID = '".$USER_ID."', TERM = '".$term."', TG_UPD=SYSDATE, ANGKATAN = UPPER('".$ANGKATAN."'), STAT_APP = '".$STAT."',KETERANGAN = '".$KET."'
-                            WHERE NRK = '".$NRK."' AND JENDIK = '".$JENDIK."' AND KODIK = '".$KODIK."'";    
+                            WHERE NRK = '".$NRK."' AND JENDIK = '".$JENDIK."' AND KODIK = '".$KODIK."' AND TGIJAZAH = TO_DATE('".$TGIJAZAH."', 'DD-MM-YYYY') ";    
         }
     
-        
+        // echo $sql;exit();
         
         $id = $this->db->query($sql);
         return $id;
@@ -1724,14 +1725,17 @@
         return true;
     }
 
-    public function delete_flag_pdNonFormal($NRK,$JENDIK,$KODIK){                
-        $sql = "UPDATE PERS_PENDIDIKAN SET DELETED='Y' WHERE NRK = '".$NRK."' AND JENDIK = '".$JENDIK."' AND KODIK = '".$KODIK."'"; 
+    public function delete_flag_pdNonFormal($NRK,$JENDIK,$KODIK,$TGIJAZAH){                
+        $sql = "UPDATE PERS_PENDIDIKAN SET DELETED='Y' WHERE NRK = '".$NRK."' AND JENDIK = '".$JENDIK."' AND KODIK = '".$KODIK."' 
+                AND TGIJAZAH = TO_DATE('".$TGIJAZAH."', 'DD-MM-YYYY') "; 
 
         $id = $this->db->query($sql);
         return $id;
     }
 
-    public function delete_pdNonFormal($NRK,$JENDIK,$KODIK){                
+    public function delete_pdNonFormal($NRK,$JENDIK,$KODIK,$TGIJAZAH){ 
+        $user_id       = $this->session->userdata('logged_in')['id'];
+
         $user_id       = $this->session->userdata('logged_in')['id'];
         $qi="INSERT INTO DEL_PERS_PENDIDIKAN A
             (
@@ -1761,12 +1765,12 @@
                 SYSDATE AS DELETE_DATE,
                 '$user_id' AS DELETE_BY
             FROM PERS_PENDIDIKAN D
-            WHERE D.NRK = '".$NRK."' AND D.JENDIK = '".$JENDIK."' AND D.KODIK = '".$KODIK."'
+            WHERE D.NRK = '".$NRK."' AND D.JENDIK = '".$JENDIK."' AND D.KODIK = '".$KODIK."' AND TGIJAZAH = TO_DATE('".$TGIJAZAH."', 'DD-MM-YYYY')
             )";
         $rsi=$this->db->query($qi);
         
-        $sql = "DELETE FROM PERS_PENDIDIKAN WHERE NRK = '".$NRK."' AND JENDIK = '".$JENDIK."' AND KODIK = '".$KODIK."'"; 
-
+        $sql = "DELETE FROM PERS_PENDIDIKAN WHERE NRK = '".$NRK."' AND JENDIK = '".$JENDIK."' AND KODIK = '".$KODIK."' AND TGIJAZAH = TO_DATE('".$TGIJAZAH."', 'DD-MM-YYYY')"; 
+        // echo $sql;exit();
         $id = $this->db->query($sql);
         return $id;
     }

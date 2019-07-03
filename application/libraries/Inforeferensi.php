@@ -313,10 +313,10 @@ class Inforeferensi {
         $sql = "SELECT PERS_PDIDIKAN_TBL.JENDIK,PERS_PDIDIKAN_TBL.KODIK, PERS_PDIDIKAN_TBL.NADIK, PERS_PDIDIKAN_TBL.USER_ID, PERS_PDIDIKAN_TBL.TERM, PERS_PDIDIKAN_TBL.TG_UPD, PERS_JENDIK_RPT.KETERANGAN
                 FROM PERS_PDIDIKAN_TBL
                 LEFT OUTER JOIN PERS_JENDIK_RPT ON PERS_PDIDIKAN_TBL.JENDIK = PERS_JENDIK_RPT.JENDIK
-                WHERE PERS_PDIDIKAN_TBL.DELETED IS NULL
+                -- WHERE PERS_PDIDIKAN_TBL.DELETED IS NULL
                 AND PERS_JENDIK_RPT.JENDIK = '".$jendik."'
                 ";                
-
+        // echo $sql;exit();
         $query = $this->ci->db->query($sql);
 
         $i = 1;
