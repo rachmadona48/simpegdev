@@ -1,0 +1,14 @@
+## SIMPEGLAMA
+application/config.php
+application/database.php
+assets/file_permohonan/*
+assets/img/*
+assets/captcha/*
+assets/pdf/*
+##TAMBAH
+penggajian/*
+
+##
+cron_job/*
+download/*
+
