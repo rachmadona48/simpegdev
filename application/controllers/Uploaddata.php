@@ -184,6 +184,8 @@ class Uploaddata extends CI_Controller {
 
 
                 $isi = ($allData[$worksheet[$j]][$k]);
+                // print_r($isi);
+                // echo 'tes';exit();
                 
                 $arrIsi = array_values($isi);
                 $compare = $arrIsi[2];
@@ -195,7 +197,7 @@ class Uploaddata extends CI_Controller {
 
                     if($isi['NRK'] != null && $isi['TMT']!=null && $isi['KOPANG']!=null && $isi['TTMASKER']!= null && $isi['BBMASKER']!= null && $isi['KOLOK']!= null && $isi['GAPOK']!= null&& $isi['PEJTT']!= null && $isi['NOSK']!= null && $isi['TGSK']!= null && $isi['USER_ID']!= null && $isi['TERM']!= null && $isi['TG_UPD']!= null)
                     {
-                        $cekData = "SELECT * FROM SAMPLE_PANGKAT_HIST WHERE NRK='".$isi['NRK']."' AND TMT=TO_DATE('".$isi['TMT']."','DD-MM-YYYY') AND KOPANG='".$isi['KOPANG']."'";
+                        $cekData = "SELECT * FROM SAMPLE_PERS_PANGKAT_HIST WHERE NRK='".$isi['NRK']."' AND TMT=TO_DATE('".$isi['TMT']."','DD-MM-YYYY') AND KOPANG='".$isi['KOPANG']."'";
                         
                         $excek = $this->db->query($cekData);
                         
@@ -207,9 +209,8 @@ class Uploaddata extends CI_Controller {
                             {   
 
 
-                                $sql = "INSERT INTO SAMPLE_PANGKAT_HIST(NRK,TMT,KOPANG,TTMASKER,BBMASKER,KOLOK,GAPOK,PEJTT,NOSK,TGSK,USER_ID,TERM,TG_UPD,KLOGAD,SPMU,TAHUN_REFGAJI,JENIS_SK,JENRUB)
-                                        VALUES('".$isi['NRK']."',TO_DATE('".$isi['TMT']."','DD-MM-YYYY'),'".$isi['KOPANG']."',".$isi['TTMASKER'].",".$isi['BBMASKER'].",'".$isi['KOLOK']."',".$isi['GAPOK'].",".$isi['PEJTT'].",UPPER ('".$isi['NOSK']."'),TO_DATE('".$isi['TGSK']."','DD-MM-YYYY'),'".$isi['USER_ID']."','".$isi['TERM']."',TO_DATE('".$isi['TG_UPD']."','DD-MM-YYYY'),NULL,NULL,
-                                            NULL,NULL,NULL
+                                $sql = "INSERT INTO SAMPLE_PERS_PANGKAT_HIST(NRK,TMT,KOPANG,TTMASKER,BBMASKER,KOLOK,GAPOK,PEJTT,NOSK,TGSK,USER_ID,TERM,TG_UPD,KLOGAD,SPMU,TAHUN_REFGAJI,JENIS_SK,JENRUB)
+                                        VALUES('".$isi['NRK']."',TO_DATE('".$isi['TMT']."','DD-MM-YYYY'),'".$isi['KOPANG']."',".$isi['TTMASKER'].",".$isi['BBMASKER'].",'".$isi['KOLOK']."',".$isi['GAPOK'].",".$isi['PEJTT'].",UPPER ('".$isi['NOSK']."'),TO_DATE('".$isi['TGSK']."','DD-MM-YYYY'),'".$isi['USER_ID']."','".$isi['TERM']."',TO_DATE('".$isi['TG_UPD']."','DD-MM-YYYY'),'".$isi['KLOGAD']."','".$isi['SPMU']."','".$isi['TAHUN_REFGAJI']."','".$isi['JENIS_SK']."','".$isi['JENRUB']."'
                                         )";
                                 
                                 $query = $this->db->query($sql);
@@ -269,7 +270,7 @@ class Uploaddata extends CI_Controller {
                             {   
 
                                 $sql = "INSERT INTO SAMPLE_PERS_RB_GAPOK_HIST(NRK,TMT,GAPOK,JENRUB,KOPANG,TTMASKER,BBMASKER,KOLOK,NOSK,TGSK,TTMASYAD,BBMASYAD,USER_ID,TERM,TG_UPD,KLOGAD,SPMU,TAHUN_REFGAJI,JENIS_SK)
-                                        VALUES('".$isi['NRK']."',TO_DATE('".$isi['TMT']."','DD-MM-YYYY'),".$isi['GAPOK'].",".$isi['JENRUB'].",'".$isi['KOPANG']."',".$isi['TTMASKER'].",".$isi['BBMASKER'].",'".$isi['KOLOK']."',UPPER ('".$isi['NOSK']."'),TO_DATE('".$isi['TGSK']."','DD-MM-YYYY'),".$isi['TTMASYAD'].",".$isi['BBMASYAD'].",'".$isi['USER_ID']."','".$isi['TERM']."',TO_DATE('".$isi['TG_UPD']."','DD-MM-YYYY'),NULL,NULL,NULL,NULL
+                                        VALUES('".$isi['NRK']."',TO_DATE('".$isi['TMT']."','DD-MM-YYYY'),".$isi['GAPOK'].",".$isi['JENRUB'].",'".$isi['KOPANG']."',".$isi['TTMASKER'].",".$isi['BBMASKER'].",'".$isi['KOLOK']."',UPPER ('".$isi['NOSK']."'),TO_DATE('".$isi['TGSK']."','DD-MM-YYYY'),".$isi['TTMASYAD'].",".$isi['BBMASYAD'].",'".$isi['USER_ID']."','".$isi['TERM']."',TO_DATE('".$isi['TG_UPD']."','DD-MM-YYYY'),'".$isi['KLOGAD']."','".$isi['SPMU']."','".$isi['TAHUN_REFGAJI']."','".$isi['JENIS_SK']."'
                                         )";
                                    
                                 $query = $this->db->query($sql);
@@ -399,6 +400,8 @@ class Uploaddata extends CI_Controller {
             $txt.= "\r\n";
             $txt.=" -- akhir dari laporan -- ";
         fwrite($myfile,$txt);
+
+        // echo fwrite($myfile,$txt);
 
         echo json_encode($param);
         //echo $hasilsukses;

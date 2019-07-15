@@ -87,14 +87,14 @@
                                         <b>SHEET 1 : Riwayat Pangkat</b><br/>
                                         Status : <b>INSERT</b><br/>
                                         Total kolom = <b>13</b> (kolom M)<br/> 
-                                        Kolom : <span style="color:#1ab394"><b>NRK, TMT, KOPANG, TTMASKER, BBMASKER, KOLOK, GAPOK,PEJTT, NOSK, TGSK, USER_ID, TERM, TG_UPD</b></span>
+                                        Kolom : <span style="color:#1ab394"><b>NRK, TMT, KOPANG, TTMASKER, BBMASKER, KOLOK, GAPOK,PEJTT, NOSK, TGSK, USER_ID, TERM, TG_UPD, KLOGAD, SPMU, TAHUN_REFGAJI, JENIS_SK, JENRUB</b></span>
                                         </li>
 
                                         <li>
                                         <b>SHEET 2 : Riwayat Gaji Pokok</b><br/>
                                         Status : <b>INSERT</b><br/>
                                         Total kolom = <b>15</b> (kolom O)<br/> 
-                                        Kolom : <span style="color:#1ab394"><b>NRK, TMT, GAPOK, JENRUB, KOPANG, TTMASKER, BBMASKER, KOLOK, NOSK, TGSK, TTMASYAD, BBMASYAD, USER_ID, TERM, TG_UPD</b></span>
+                                        Kolom : <span style="color:#1ab394"><b>NRK, TMT, GAPOK, JENRUB, KOPANG, TTMASKER, BBMASKER, KOLOK, NOSK, TGSK, TTMASYAD, BBMASYAD, USER_ID, TERM, TG_UPD, KLOGAD, SPMU, TAHUN_REFGAJI, JENIS_SK</b></span>
                                         </li>
                                     </ul>
 
@@ -515,7 +515,7 @@
                 var file = $('#upload2')[0].files[0];
                 formdata.append('fFile', file);
 
-                $.each($('#myForm2').serializeArray(), function(a, b){
+                $.each($('#myForm2').serializeArray(), function(a, b){ 
                     formdata.append(b.name, b.value);
                 });
       
