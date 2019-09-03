@@ -128,6 +128,8 @@ class Spesimen extends CI_Controller {
         $cek = $this->ttd->cek_ttd_bkd($nrk);
         $location = '/assets/img/ttd/';
 
+        // echo $nrk.' nrk';
+
         if($status_input=='on'){
             $status = 'Aktif';
         }else{

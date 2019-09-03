@@ -1,0 +1,22 @@
+Laporan Upload Data Kolektif < 2019-08-05 17:45:22 >
+_______________________________________
+ Sheet pegawai1
+
+Jumlah Data : 2
+Data Sukses : 2
+Data Error : 0
+
+-----------------------------------------
+
+ Sheet jabatan_hist
+
+Jumlah Data : 2
+Data Sukses : 0
+Data Error : 0
+
+Data Duplikasi : 2
+         Duplikat Row 2
+         Duplikat Row 3
+
+
+ -- akhir dari laporan -- 

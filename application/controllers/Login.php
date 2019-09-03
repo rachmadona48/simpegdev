@@ -47,7 +47,7 @@ class Login extends CI_Controller {
 		$data['isiInformasi'] = $info;
 		$data['isiInformasiBaru'] = $infobaru;
 
-		// $data['image'] = $this->load_captcha(0);
+		$data['image'] = $this->load_captcha(0);
 
 		$data['ctInfo'] = $this->minformasi->cekInformasiTerbaru();
             
@@ -203,21 +203,26 @@ class Login extends CI_Controller {
 		if ($this->input->post() ) 
 		{			
 			$isCaptcha = true;
-			if (ENVIRONMENT == 'production') {
+			// echo ENVIRONMENT;
+			// if (ENVIRONMENT == 'production') {
+			// echo $this->input->post('security_code'); echo '<br> vvv';
+			// echo $this->session->userdata('mycaptcha');
+			if (ENVIRONMENT == 'development') {
 				$isCaptcha = ($this->input->post('security_code') == $this->session->userdata('mycaptcha'));
+				
 			}
-
+			// echo $isCaptcha;exit();
 			if($isCaptcha)
 			{
 				$data = array(
 					'username' => $this->input->post('username'),
 					'password' => $this->input->post('password'),
-					//'captcha_response' => $this->input->post('g-recaptcha-response')
+					'captcha_response' => $this->input->post('g-recaptcha-response')
 				);
 
 				$result = $this->mlogin->login($data);
 
-					if ($result == TRUE) {
+				if ($result == TRUE) {
 
 					$username = $this->input->post('username');
 

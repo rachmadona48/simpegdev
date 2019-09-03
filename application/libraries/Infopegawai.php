@@ -3269,48 +3269,55 @@ class Infopegawai {
         </div>"; //IBOX TITLE
         $table .= "<div class='ibox-content'>"; //START IBOX CONTENT
         $table .= "<div id='_content_riwayat_".$id."' class='animated fadeInUp'>";
-        $table .= "<div class='col-md-7'>";
+        // $table .= "<div class='col-md-7'>";
 
-        if($ug != 1){
-            $table .= "<div class='col-md-7'>
-                        <div class='col-md-12'>
-                        <button type='button' class='btn btn-success btn-xs' onClick='getForm(\"rekap_cuti\",\"update\",\"".$nrk."\",\"2017\");'><i class='fa fa-pencil-square'></i></button><span><b> Jumlah cuti tahun 2017 : ".$REKAP_2017->JML."</b></span>
-                        </div>
-                        <div class='col-md-12'>
-                        <button type='button' class='btn btn-success btn-xs' onClick='getForm(\"rekap_cuti\",\"update\",\"".$nrk."\",\"2018\");'><i class='fa fa-pencil-square'></i></button><span><b> Jumlah cuti tahun 2018 : ".$REKAP_2018->JML."</b></span>
-                        </div>
-                    </div>
-                </div>";
-        }else{
-            $table .= "<div class='col-md-7'>
-                            <div class='col-md-12'>
-                            <button type='button' class='btn btn-success btn-xs'> <i class='fa fa-pencil-square'></i></button><span><b> Jumlah cuti tahun 2017 : ".$REKAP_2017->JML."</b></span>
-                            </div>
-                            <div class='col-md-12'>
-                            <button type='button' class='btn btn-success btn-xs'> <i class='fa fa-pencil-square'></i></button><span><b> Jumlah cuti tahun 2018 : ".$REKAP_2018->JML."</b></span>
-                            </div>
-                        </div>
-                    </div>";
-        }
+        // hide cuti
+        // if($ug != 1){
+        //     $table .= "<div class='col-md-7'>
+        //                 <div class='col-md-12'>
+        //                 <button type='button' class='btn btn-success btn-xs' onClick='getForm(\"rekap_cuti\",\"update\",\"".$nrk."\",\"2017\");'><i class='fa fa-pencil-square'></i></button><span><b> Jumlah cuti tahun 2017 : ".$REKAP_2017->JML."</b></span>
+        //                 </div>
+        //                 <div class='col-md-12'>
+        //                 <button type='button' class='btn btn-success btn-xs' onClick='getForm(\"rekap_cuti\",\"update\",\"".$nrk."\",\"2018\");'><i class='fa fa-pencil-square'></i></button><span><b> Jumlah cuti tahun 2018 : ".$REKAP_2018->JML."</b></span>
+        //                 </div>
+        //             </div>
+        //         </div>";
+        // }else{
+        //     $table .= "<div class='col-md-7'>
+        //                     <div class='col-md-12'>
+        //                     <button type='button' class='btn btn-success btn-xs'> <i class='fa fa-pencil-square'></i></button><span><b> Jumlah cuti tahun 2017 : ".$REKAP_2017->JML."</b></span>
+        //                     </div>
+        //                     <div class='col-md-12'>
+        //                     <button type='button' class='btn btn-success btn-xs'> <i class='fa fa-pencil-square'></i></button><span><b> Jumlah cuti tahun 2018 : ".$REKAP_2018->JML."</b></span>
+        //                     </div>
+        //                 </div>
+        //             </div>";
+        // }
+
         $table .= "</div>";
-        $table .= "<div class='col-md-4 pull-right'>";
+        // $table .= "<div class='col-md-4 pull-right'>";
         if($accIns == 'Y'){
-        $table .= "<div class='col-md-5'><button type='button' class='btn btn-primary btn-sm btn-block m-t' onClick='getForm(\"cuti\",\"tambah\");'><i class='fa fa-plus'></i> Tambah Data</button></div>";
+        // $table .= "<div class='col-md-5'><button type='button' class='btn btn-primary btn-sm btn-block m-t' onClick='getForm(\"cuti\",\"tambah\");'><i class='fa fa-plus'></i> Tambah Data</button></div>";
+
+        $table .= "<div class='pull-right'><button type='button' class='btn btn-primary btn-sm btn-block m-t' onClick='getForm(\"cuti\",\"tambah\");'><i class='fa fa-plus'></i> Tambah Data</button></div>";
+        
         }else{
-        $table .= "<div class='col-md-5'></div>";
+        // $table .= "<div class='col-md-5'></div>";
         }
-        if($ug != 1){
-        $table .= "<div class='col-md-7'>
-        			<button type='button' class='btn btn-primary btn-sm btn-block m-t' onClick='getForm(\"rekap_cuti\",\"tambah\");'><i class='fa fa-plus'></i> Rekap Cuti Tahunan</button>
-        			<div>
-        			</div>
-        		</div>";
-        }else{
-        	$table .= "<div class='col-md-7'>
-        			</div>
-        		</div>";
-        }
-        $table .= "</div>";
+
+        // if($ug != 1){
+        // $table .= "<div class='col-md-7'>
+        // 			<button type='button' class='btn btn-primary btn-sm btn-block m-t' onClick='getForm(\"rekap_cuti\",\"tambah\");'><i class='fa fa-plus'></i> Rekap Cuti Tahunan</button>
+        // 			<div>
+        // 			</div>
+        // 		</div>";
+        // }else{
+        // 	$table .= "<div class='col-md-7'>
+        // 			</div>
+        // 		</div>";
+        // }
+
+        // $table .= "</div>";
         $table .= "<table class='table table-striped table-bordered table-hover dataTables-example' width='99%'>";
         $table .= "<thead>";
         $table .= " <tr>                        
@@ -3436,48 +3443,53 @@ class Infopegawai {
         </div>"; //IBOX TITLE
         $table .= "<div class='ibox-content'>"; //START IBOX CONTENT
         $table .= "<div id='_content_riwayat_".$id."' class='animated fadeInUp'>";
-        $table .= "<div class='col-md-7'>";
 
-        if($ug != 1){
-            $table .= "<div class='col-md-7'>
-                        <div class='col-md-12'>
-                        <button type='button' class='btn btn-success btn-xs' onClick='getForm(\"rekap_cuti\",\"update\",\"".$nrk."\",\"2017\");'><i class='fa fa-pencil-square'></i></button><span><b> Jumlah cuti tahun 2017 : ".$REKAP_2017->JML."</b></span>
-                        </div>
-                        <div class='col-md-12'>
-                        <button type='button' class='btn btn-success btn-xs' onClick='getForm(\"rekap_cuti\",\"update\",\"".$nrk."\",\"2018\");'><i class='fa fa-pencil-square'></i></button><span><b> Jumlah cuti tahun 2018 : ".$REKAP_2018->JML."</b></span>
-                        </div>
-                    </div>
-                </div>";
-        }else{
-            $table .= "<div class='col-md-7'>
+        // hide cuti
+        // $table .= "<div class='col-md-7'>";
 
-                            <div class='col-md-12'>
-                            <button type='button' class='btn btn-success btn-xs'> <i class='fa fa-pencil-square'></i></button><span><b> Jumlah cuti tahun 2017 : ".$REKAP_2017->JML."</b></span>
-                            </div>
-                            <div class='col-md-12'>
-                            <button type='button' class='btn btn-success btn-xs'> <i class='fa fa-pencil-square'></i></button><span><b> Jumlah cuti tahun 2018 : ".$REKAP_2018->JML."</b></span>
-                            </div>
-                        </div>
-                    </div>";
-        }
-        $table .= "</div>";
-        $table .= "<div class='col-md-4 pull-right'>";
+        // if($ug != 1){
+        //     $table .= "<div class='col-md-7'>
+        //                 <div class='col-md-12'>
+        //                 <button type='button' class='btn btn-success btn-xs' onClick='getForm(\"rekap_cuti\",\"update\",\"".$nrk."\",\"2017\");'><i class='fa fa-pencil-square'></i></button><span><b> Jumlah cuti tahun 2017 : ".$REKAP_2017->JML."</b></span>
+        //                 </div>
+        //                 <div class='col-md-12'>
+        //                 <button type='button' class='btn btn-success btn-xs' onClick='getForm(\"rekap_cuti\",\"update\",\"".$nrk."\",\"2018\");'><i class='fa fa-pencil-square'></i></button><span><b> Jumlah cuti tahun 2018 : ".$REKAP_2018->JML."</b></span>
+        //                 </div>
+        //             </div>
+        //         </div>";
+        // }else{
+        //     $table .= "<div class='col-md-7'>
+
+        //                     <div class='col-md-12'>
+        //                     <button type='button' class='btn btn-success btn-xs'> <i class='fa fa-pencil-square'></i></button><span><b> Jumlah cuti tahun 2017 : ".$REKAP_2017->JML."</b></span>
+        //                     </div>
+        //                     <div class='col-md-12'>
+        //                     <button type='button' class='btn btn-success btn-xs'> <i class='fa fa-pencil-square'></i></button><span><b> Jumlah cuti tahun 2018 : ".$REKAP_2018->JML."</b></span>
+        //                     </div>
+        //                 </div>
+        //             </div>";
+        // }
+        // $table .= "</div>";
+        // $table .= "<div class='col-md-4 pull-right'>";
         if($accIns == 'Y'){
-        $table .= "<div class='col-md-5'><button type='button' class='btn btn-primary btn-sm btn-block m-t' onClick='getForm(\"cuti\",\"tambah\");'><i class='fa fa-plus'></i> Tambah Data</button></div>";
+        // $table .= "<div class='col-md-5'><button type='button' class='btn btn-primary btn-sm btn-block m-t' onClick='getForm(\"cuti\",\"tambah\");'><i class='fa fa-plus'></i> Tambah Data</button></div>";
+
+        $table .= "<div class='pull-right'><button type='button' class='btn btn-primary btn-sm btn-block m-t' onClick='getForm(\"cuti\",\"tambah\");'><i class='fa fa-plus'></i> Tambah Data</button></div>";
         }else{
-        $table .= "<div class='col-md-5'></div>";
+        // $table .= "<div class='col-md-5'></div>";
         }
-        if($ug != 1){
-        $table .= "<div class='col-md-7'>
-                    <button type='button' class='btn btn-primary btn-sm btn-block m-t' onClick='getForm(\"rekap_cuti\",\"tambah\");'><i class='fa fa-plus'></i> Rekap Cuti Tahunan</button>
-                    <div>
-                    </div>
-                </div>";
-        }else{
-            $table .= "<div class='col-md-7'>
-                    </div>
-                </div>";
-        }
+
+        // if($ug != 1){
+        // $table .= "<div class='col-md-7'>
+        //             <button type='button' class='btn btn-primary btn-sm btn-block m-t' onClick='getForm(\"rekap_cuti\",\"tambah\");'><i class='fa fa-plus'></i> Rekap Cuti Tahunan</button>
+        //             <div>
+        //             </div>
+        //         </div>";
+        // }else{
+        //     $table .= "<div class='col-md-7'>
+        //             </div>
+        //         </div>";
+        // }
 
         $table .= "</div>";
 

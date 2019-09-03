@@ -1,0 +1,67 @@
+Laporan Upload Data Kolektif < 2016-10-19 10:31:02 >
+_______________________________________
+ Sheet Pegawai 1
+
+Jumlah Data : 9
+Data Sukses : 9
+Data Error : 0
+
+-----------------------------------------
+
+ Sheet jabatan hist
+
+Jumlah Data : 9
+Data Sukses : 0
+Data Error : 0
+
+Data Duplikasi : 9
+         Duplikat Row 2
+         Duplikat Row 3
+         Duplikat Row 4
+         Duplikat Row 5
+         Duplikat Row 6
+         Duplikat Row 7
+         Duplikat Row 8
+         Duplikat Row 9
+         Duplikat Row 10
+
+
+
+ Sheet pangkat
+
+Jumlah Data : 9
+Data Sukses : 0
+Data Error : 0
+
+Data Duplikasi : 9
+         Duplikat Row 2
+         Duplikat Row 3
+         Duplikat Row 4
+         Duplikat Row 5
+         Duplikat Row 6
+         Duplikat Row 7
+         Duplikat Row 8
+         Duplikat Row 9
+         Duplikat Row 10
+
+
+
+ Sheet gapok
+
+Jumlah Data : 9
+Data Sukses : 0
+Data Error : 0
+
+Data Duplikasi : 9
+         Duplikat Row 2
+         Duplikat Row 3
+         Duplikat Row 4
+         Duplikat Row 5
+         Duplikat Row 6
+         Duplikat Row 7
+         Duplikat Row 8
+         Duplikat Row 9
+         Duplikat Row 10
+
+
+ -- akhir dari laporan -- 

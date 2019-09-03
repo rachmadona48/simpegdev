@@ -1,0 +1,41 @@
+Laporan Upload Data Kolektif < 2016-10-17 15:55:13 >
+_______________________________________
+ Sheet C8 master
+
+Jumlah Data : 9
+Data Sukses : 0
+Data Error : 1
+         Error Row 10
+
+Data Duplikasi : 9
+         Duplikat Row 2
+         Duplikat Row 3
+         Duplikat Row 4
+         Duplikat Row 5
+         Duplikat Row 6
+         Duplikat Row 7
+         Duplikat Row 8
+         Duplikat Row 9
+         Duplikat Row 10
+
+
+-----------------------------------------
+
+ Sheet C7 INSERT
+
+Jumlah Data : 9
+Data Sukses : 0
+Data Error : 0
+
+Data Duplikasi : 8
+         Duplikat Row 2
+         Duplikat Row 3
+         Duplikat Row 4
+         Duplikat Row 5
+         Duplikat Row 6
+         Duplikat Row 7
+         Duplikat Row 8
+         Duplikat Row 9
+
+
+ -- akhir dari laporan -- 

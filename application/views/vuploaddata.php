@@ -211,7 +211,7 @@
                                         <b>SHEET 1 : Pegawai 1</b><br/>
                                         Status : <b>UPDATE</b><br/>
                                         Total kolom = <b>3</b> (kolom C)<br/> 
-                                        Kolom : <span style="color:#1ab394"><b>NRK, KLOGAD, TMTPENSIUN</b></span>
+                                        Kolom : <span style="color:#1ab394"><b>NRK, KLOGAD, TMTPENSIUN, KOJAB</b></span>
                                         </li>
 
                                         <li>

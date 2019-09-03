@@ -209,7 +209,7 @@ class Uploaddata extends CI_Controller {
                             {   
 
 
-                                $sql = "INSERT INTO SAMPLE_PERS_PANGKAT_HIST(NRK,TMT,KOPANG,TTMASKER,BBMASKER,KOLOK,GAPOK,PEJTT,NOSK,TGSK,USER_ID,TERM,TG_UPD,KLOGAD,SPMU,TAHUN_REFGAJI,JENIS_SK,JENRUB)
+                                $sql = "INSERT INTO PERS_PANGKAT_HIST(NRK,TMT,KOPANG,TTMASKER,BBMASKER,KOLOK,GAPOK,PEJTT,NOSK,TGSK,USER_ID,TERM,TG_UPD,KLOGAD,SPMU,TAHUN_REFGAJI,JENIS_SK,JENRUB)
                                         VALUES('".$isi['NRK']."',TO_DATE('".$isi['TMT']."','DD-MM-YYYY'),'".$isi['KOPANG']."',".$isi['TTMASKER'].",".$isi['BBMASKER'].",'".$isi['KOLOK']."',".$isi['GAPOK'].",".$isi['PEJTT'].",UPPER ('".$isi['NOSK']."'),TO_DATE('".$isi['TGSK']."','DD-MM-YYYY'),'".$isi['USER_ID']."','".$isi['TERM']."',TO_DATE('".$isi['TG_UPD']."','DD-MM-YYYY'),'".$isi['KLOGAD']."','".$isi['SPMU']."','".$isi['TAHUN_REFGAJI']."','".$isi['JENIS_SK']."','".$isi['JENRUB']."'
                                         )";
                                 
@@ -269,7 +269,7 @@ class Uploaddata extends CI_Controller {
                             if($num == 0)
                             {   
 
-                                $sql = "INSERT INTO SAMPLE_PERS_RB_GAPOK_HIST(NRK,TMT,GAPOK,JENRUB,KOPANG,TTMASKER,BBMASKER,KOLOK,NOSK,TGSK,TTMASYAD,BBMASYAD,USER_ID,TERM,TG_UPD,KLOGAD,SPMU,TAHUN_REFGAJI,JENIS_SK)
+                                $sql = "INSERT INTO PERS_RB_GAPOK_HIST(NRK,TMT,GAPOK,JENRUB,KOPANG,TTMASKER,BBMASKER,KOLOK,NOSK,TGSK,TTMASYAD,BBMASYAD,USER_ID,TERM,TG_UPD,KLOGAD,SPMU,TAHUN_REFGAJI,JENIS_SK)
                                         VALUES('".$isi['NRK']."',TO_DATE('".$isi['TMT']."','DD-MM-YYYY'),".$isi['GAPOK'].",".$isi['JENRUB'].",'".$isi['KOPANG']."',".$isi['TTMASKER'].",".$isi['BBMASKER'].",'".$isi['KOLOK']."',UPPER ('".$isi['NOSK']."'),TO_DATE('".$isi['TGSK']."','DD-MM-YYYY'),".$isi['TTMASYAD'].",".$isi['BBMASYAD'].",'".$isi['USER_ID']."','".$isi['TERM']."',TO_DATE('".$isi['TG_UPD']."','DD-MM-YYYY'),'".$isi['KLOGAD']."','".$isi['SPMU']."','".$isi['TAHUN_REFGAJI']."','".$isi['JENIS_SK']."'
                                         )";
                                    
@@ -528,7 +528,7 @@ class Uploaddata extends CI_Controller {
 											if($nrk != null && $nama != null && $stapeg!=null && $user_id != null && $term!= null && $tg_upd != null)
 											{
 												$sql_update = "UPDATE PERS_PEGAWAI1 SET KLOGAD='".$klogad."',NAMA='".$nama."', TITEL='".$titel."', STAPEG=".$stapeg.", TMT_STAPEG=TO_DATE('".$tmtstapeg."','DD-MM-YYYY'),USER_ID ='".$user_id."',TERM='".$term."',TG_UPD = TO_DATE('".$tg_upd."','DD-MM-YYYY'),KOLOK='".$kolok."', KOJAB='".$kojab."',TITELDEPAN='".$titeldepan."',KD='".$kd."',SPMU='".$spmu."' WHERE NRK='".$nrk."'";
-												
+												// echo $sql_update;exit();
 												$query_update = $this->db->query($sql_update);	
 
 												if($query_update)
@@ -996,7 +996,7 @@ class Uploaddata extends CI_Controller {
              if($i == 0)
              {
                 $jmlpeg1 = $highestRow-1;
-                $highestColumn=PHPExcel_Cell::columnIndexFromString('C');
+                $highestColumn=PHPExcel_Cell::columnIndexFromString('D');
              }
              else if($i == 1)
              {
@@ -1006,6 +1006,7 @@ class Uploaddata extends CI_Controller {
              $isiExcel[$i] = array($worksheetTitle,$highestRow,$highestColumn);
              $dataperrow;
 
+
                 for($r=2 ;$r<=$highestRow;$r++ )
                 {
                     $dataperrow= array();
@@ -1013,17 +1014,18 @@ class Uploaddata extends CI_Controller {
                     {
                         
                         $dataperrow[$c] = $worksheet->getCellByColumnAndRow($c, $r)->getValue();
-
+                        // print_r($dataperrow);exit();
                         if($c == $highestColumn - 1)
                         {
                             if($highestColumn == count($dataperrow))
                             {
                                 if($i == 0)
                                 {
-                                    
+                                    // echo $highestColumn;exit();
                                     $nrk = $dataperrow[0];
                                     $klogad = $dataperrow[1];
                                     $tmtpensiun = $dataperrow[2];
+                                    $kojab = $dataperrow[3];
                                     
                                     
                                     $sql_cek="SELECT * FROM PERS_PEGAWAI1 WHERE NRK='".$nrk."'";
@@ -1037,7 +1039,9 @@ class Uploaddata extends CI_Controller {
                                         {
                                             if($nrk != null && $klogad != null && $tmtpensiun!=null)
                                             {
-                                                $sql_update = "UPDATE PERS_PEGAWAI1 SET KLOGAD='".$klogad."', TMTPENSIUN=TO_DATE('".$tmtpensiun."','DD-MM-YYYY') WHERE NRK='".$nrk."'";
+                                                $sql_update = "UPDATE PERS_PEGAWAI1 SET KLOGAD='".$klogad."', TMTPENSIUN=TO_DATE('".$tmtpensiun."','DD-MM-YYYY'),KOJAB='".$kojab."' WHERE NRK='".$nrk."'";
+
+                                                // echo $sql_update;exit();
                                                 
                                                 $query_update = $this->db->query($sql_update);  
 
@@ -1098,16 +1102,17 @@ class Uploaddata extends CI_Controller {
                                     $jenis_sk = '';
                                     
                                     $sql_cek="SELECT * FROM PERS_JABATAN_HIST WHERE NRK='".$nrk."' AND TMT = TO_DATE('".$tmt."','DD-MM-YYYY') AND KOLOK = '".$kolok."' AND KOJAB ='".$kojab."'";
-                                    
+                                    // echo $sql_cek;exit();
                                     $query_cek = $this->db->query($sql_cek);
-
+                                    // echo $query_cek;exit();
                                     if($query_cek)
                                     {
+                                        // echo 'masuk';exit();
                                         $value_cek = $query_cek->num_rows();
                                         
                                         if($value_cek == 0)
                                         {
-                                           
+                                           // echo $value_cek;
                                             if($nrk != null && $tmt != null && $kolok!=null && $kojab != null && $kdsort!= null && $kopang != null && $eselon != null && $pejtt != null && $nosk != null && $tgsk != null && $kredit != null && $status!=null && $user_id != null && $term != null && $tg_upd != null
 
                                             ) 
@@ -1115,7 +1120,7 @@ class Uploaddata extends CI_Controller {
                                                 
                                                 $sql_insjab = "INSERT INTO PERS_JABATAN_HIST(NRK,TMT,KOLOK,KOJAB,KDSORT,TGAKHIR,KOPANG,ESELON,PEJTT,NOSK,TGSK,KREDIT,STATUS,USER_ID,TERM,TG_UPD,CKOJABF,KLOGAD,SPMU,TMTPENSIUN,NESELON2,JENIS_SK) 
                                                 VALUES ('".$nrk."',TO_DATE('".$tmt."', 'DD-MM-YYYY'),'".$kolok."','".$kojab."','".$kdsort."',TO_DATE('".$tgakhir."', 'DD-MM-YY'),'".$kopang."','".$eselon."',".$pejtt.",UPPER('".$nosk."'),TO_DATE('".$tgsk."', 'DD-MM-YYYY'),".$kredit.",".$status.",'".$user_id."','".$term."', TO_DATE('".$tg_upd."', 'DD-MM-YYYY'),'".$ckojabf."','".$klogad."','".$spmu."',TO_DATE('".$tmtpensiun."', 'DD-MM-YYYY'),'".$neselon2."','".$jenis_sk."')";
-                                                  
+                                                // echo $sql_insjab; exit();
                                                 $query_insjab = $this->db->query($sql_insjab);  
 
                                                 if($query_insjab)
@@ -1156,6 +1161,10 @@ class Uploaddata extends CI_Controller {
                         }
                     }//end looping col
                 }// end looping row
+
+                // print_r($dataperrow);
+
+                // exit();
 
        }
 

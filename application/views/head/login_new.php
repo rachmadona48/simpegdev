@@ -173,10 +173,10 @@
 
                             <div class="form-group">
                                 <div class="col-lg-12">
-                    <!-- <p id="captcha_img"><?=  $image;?></p>
-                    <a href="#" onclick="reload_captcha()">Reload Captcha</a> -->
-                    <!-- <label class="sr-only" for="">Captcha</label>
-                    <input type="text" id="security_code" name="security_code" placeholder="Ketik isi captcha" class="form-control"> -->
+                    <p id="captcha_img"><?=  $image;?></p>
+                    <a href="#" onclick="reload_captcha()">Reload Captcha</a>
+                    <label class="sr-only" for="">Captcha</label>
+                    <input type="text" id="security_code" name="security_code" placeholder="Ketik isi captcha" class="form-control">
                 </div>
                   </div>                      
     
@@ -327,7 +327,7 @@
                     var username = $('input[name=username]').val();
                     var password = $('input[name=password]').val();
                     var security_code = true;
-                    <?php if (ENVIRONMENT == 'production') { ?>
+                    <?php if (ENVIRONMENT == 'development') { ?>
                         security_code = $('input[name=security_code]').val();
                     <?php } ?>
                     //if(!cresponse || !username || !password){
